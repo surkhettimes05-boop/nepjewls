@@ -4,6 +4,23 @@ collection-component {
 }
 
 :root {
+  /* Brand Tokens */
+  --color-primary: #1B2A3A;   /* Deep Charcoal Navy */
+  --color-accent: #A87C2A;    /* Antique Gold */
+  --color-neutral: #F2EDE4;   /* Warm Ivory */
+  --color-support: #5B5B5B;   /* Slate Grey */
+
+  /* Spacing Scale (8px) */
+  --space-1: 4px; --space-2: 8px; --space-3: 16px;
+  --space-4: 24px; --space-5: 40px; --space-6: 64px; --space-7: 96px;
+
+  /* Motion Language */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+
+  /* Shopify Defaults overridden/kept */
   --alpha-button-background: 1;
   --alpha-button-border: 1;
   --alpha-link: 0.85;

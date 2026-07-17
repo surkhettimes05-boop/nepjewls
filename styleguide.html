@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Styleguide Preview</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Brand Tokens */
+            --color-primary: #1B2A3A;   /* Deep Charcoal Navy */
+            --color-accent: #A87C2A;    /* Antique Gold */
+            --color-neutral: #F2EDE4;   /* Warm Ivory */
+            --color-support: #5B5B5B;   /* Slate Grey */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+
+            /* Spacing Scale (8px) */
+            --space-1: 4px; --space-2: 8px; --space-3: 16px;
+            --space-4: 24px; --space-5: 40px; --space-6: 64px; --space-7: 96px;
+
+            /* Motion */
+            --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+            --duration-base: 400ms;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-neutral);
+            color: var(--color-primary);
+            margin: 0;
+            padding: var(--space-6);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 500;
+            margin-top: 0;
+            color: var(--color-primary);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: var(--space-6);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(27, 42, 58, 0.05);
+        }
+
+        .section {
+            margin-bottom: var(--space-7);
+        }
+
+        .section-title {
+            border-bottom: 1px solid var(--color-support);
+            padding-bottom: var(--space-2);
+            margin-bottom: var(--space-5);
+            color: var(--color-support);
+            text-transform: uppercase;
+            font-family: var(--font-body);
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        /* Typography Specs */
+        .type-hero { font-size: 64px; line-height: 1.1; margin-bottom: var(--space-3); }
+        .type-h1 { font-size: 48px; line-height: 1.2; margin-bottom: var(--space-3); }
+        .type-h2 { font-size: 32px; line-height: 1.3; margin-bottom: var(--space-3); }
+        .type-body-large { font-size: 18px; color: var(--color-support); margin-bottom: var(--space-4); }
+        .type-body { font-size: 16px; color: var(--color-support); margin-bottom: var(--space-2); }
+
+        /* Color Swatches */
+        .palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+        }
+        
+        .swatch-card {
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .swatch-color {
+            height: 120px;
+            width: 100%;
+        }
+
+        .swatch-color.primary { background: var(--color-primary); }
+        .swatch-color.accent { background: var(--color-accent); }
+        .swatch-color.neutral { background: var(--color-neutral); }
+        .swatch-color.support { background: var(--color-support); }
+        
+        .swatch-details {
+            padding: var(--space-3);
+            background: white;
+        }
+
+        .swatch-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+        .swatch-hex { font-size: 12px; color: var(--color-support); font-family: monospace; }
+
+        /* Component Preview */
+        .btn {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: var(--space-3) var(--space-5);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: background var(--duration-base) var(--ease-premium);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--color-accent);
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            border: 1px solid var(--color-accent);
+            color: var(--color-accent);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="section">
+            <div class="section-title">Brand Typography</div>
+            <div class="type-hero">Not by weight.<br>By design.</div>
+            <div class="type-body-large">Replacing "gold by the tola" with wearable art you can verify.</div>
+            
+            <hr style="border: 0; border-top: 1px solid #eee; margin: var(--space-5) 0;">
+            
+            <div class="type-h1">The Signature Collection</div>
+            <div class="type-h2">A modern take on Newari lattice work.</div>
+            <div class="type-body">Our hallmark motif is featured on every piece. Crafted in Kathmandu by master karigars with 100% cadmium-free silver.</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Color Palette</div>
+            <div class="palette">
+                <div class="swatch-card">
+                    <div class="swatch-color primary"></div>
+                    <div class="swatch-details">
+                        <div class="swatch-name">Deep Charcoal Navy</div>
+                        <div class="swatch-hex">#1B2A3A</div>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color accent"></div>
+                    <div class="swatch-details">
+                        <div class="swatch-name">Antique Gold</div>
+                        <div class="swatch-hex">#A87C2A</div>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color neutral"></div>
+                    <div class="swatch-details">
+                        <div class="swatch-name">Warm Ivory</div>
+                        <div class="swatch-hex">#F2EDE4</div>
+                    </div>
+                </div>
+                <div class="swatch-card">
+                    <div class="swatch-color support"></div>
+                    <div class="swatch-details">
+                        <div class="swatch-name">Slate Grey</div>
+                        <div class="swatch-hex">#5B5B5B</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Component Previews (Motion)</div>
+            <div style="margin-bottom: var(--space-4);">
+                <a href="#" class="btn">Shop the Collection</a>
+                <span style="margin-left: var(--space-3); font-size: 14px; color: var(--color-support);">Hover to see --ease-premium transition</span>
+            </div>
+            
+            <div>
+                <div class="trust-badge">
+                    ✦ Cadmium-Free &nbsp;|&nbsp; Karigar Crafted
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
