@@ -1,0 +1,425 @@
+PRODUCT REQUIREMENTS DOCUMENT
+
+Modern Nepalese Fine Jewelry Brand
+
+Brand System • Website & E-Commerce • Marketing & Advertising
+
+Version 1.0  |  Prepared July 2026
+
+Table of Contents
+
+1. Overview & Objective
+
+This document defines the complete brand, website/e-commerce, and marketing-advertising system for a new modern Nepalese fine jewelry brand. It is phased deliberately: a lean, fundable Phase 1 launch system, followed by Phase 2 and Phase 3 upgrades that are only justified once the business has revenue and data to support them. The intent is to avoid building luxury-conglomerate infrastructure (blockchain provenance, enterprise AR, in-house 3D-print manufacturing) before the brand has proven it can sell.
+
+Core positioning: Shift the customer from viewing jewelry as priced bullion (gold/silver by weight) to viewing it as wearable art with a recognizable design identity and verifiable purity.
+
+Primary market: Urban Nepal (Kathmandu Valley first), Gen Z / young millennial buyers plus traditional gifting occasions (weddings, Dashain/Tihar, engagements).
+
+Secondary market (Phase 3+): Nepali diaspora (Gulf, US, Australia, UK) — higher willingness to pay, added shipping/customs complexity.
+
+Success definition: A repeatable, unit-economically sound direct-to-consumer channel that does not depend on the founder's personal network to sell.
+
+2. Brand Strategy
+
+2.1 Positioning Statement
+
+For young, image-conscious Nepali buyers and gifting occasions, [Brand] is the jewelry house that replaces “gold by the tola” thinking with wearable art you can verify — anchored by one recognizable motif and a guarantee of purity that Nepal's market has historically lacked.
+
+2.2 Signature Motif (highest-priority brand asset)
+
+A single, ownable design element repeated across every collection — the way Cartier owns the Panthère and Van Cleef & Arpels owns the Alhambra clover. This is the cheapest, highest-leverage thing in this whole PRD and should be locked before anything else ships.
+
+Candidate directions: a stylised lotus petal edge, a geometric motif drawn from Newari temple lattice/strut work, a modern take on the Nepali “paisley” (paankhi) curve.
+
+Requirement: must work as (a) a physical engraving/motif on metal, (b) a 2D logo mark, (c) a packaging pattern, (d) a social media avatar at 40px.
+
+Deliverable: 3–5 motif concepts from a designer/illustrator, tested on 2–3 physical prototypes before locking.
+
+2.3 Trust & Transparency Pillar
+
+Purity fraud (cadmium-mixed silver, undisclosed alloy content) is a documented, real pain point in the Nepali market. This is a genuine differentiation angle and should be the second pillar of every piece of marketing, not a footnote.
+
+Public commitment: cadmium-free, disclosed alloy composition on every listing and receipt.
+
+Phase 1: a printed purity/certificate card with lab-test batch reference number — no blockchain needed.
+
+Phase 2+: NFC tag on packaging linking to a web page with the piece's material origin, karigar (artisan) credit, and batch certificate — a simple database-backed page, not a blockchain product passport.
+
+2.4 Brand Voice
+
+Confident, warm, specific — never generic luxury-speak (“indulge,” “timeless elegance”).
+
+Leads with craft and provenance: name the karigar, name the material, name the motif's meaning.
+
+Bilingual by default: Nepali-first tone for local buyers, English for diaspora/global.
+
+3. Visual Identity Guidelines
+
+3.1 Logo
+
+Wordmark in a refined serif or high-contrast sans (avoid generic “luxury script” cliches), paired with the signature motif as a standalone mark usable without the wordmark (packaging, favicon, social avatar).
+
+3.2 Colour Palette
+
+Role
+
+Colour
+
+Usage
+
+Primary
+
+Deep Charcoal Navy (#1B2A3A)
+
+Backgrounds, headers, primary text
+
+Accent
+
+Antique Gold (#A87C2A)
+
+CTAs, motif line-work, foil packaging
+
+Neutral
+
+Warm Ivory (#F2EDE4)
+
+Page backgrounds, product photography backdrop
+
+Support
+
+Slate Grey (#5B5B5B)
+
+Body copy, secondary text
+
+3.3 Typography
+
+Headings: a refined serif (e.g. Playfair Display, Canela, or a licensed equivalent) for warmth and craft association.
+
+Body/UI: a clean grotesk (e.g. Inter, Suisse) for readability on mobile — most Nepali traffic will be mobile-first.
+
+3.4 Photography Style
+
+Warm ivory/neutral backdrops, natural light emulation, macro shots showing texture and motif detail.
+
+Every collection includes at least one shoot on a real Nepali model in a real setting (temple courtyard, Kathmandu Valley, a wedding context) — not generic AI-model renders. AI-generated imagery, if used at all, is a Phase 2+ cost-saving supplement for catalogue filler shots only, never for hero/campaign imagery.
+
+4. Website & E-Commerce PRD
+
+4.1 Goals & Success Metrics
+
+Metric
+
+Phase 1 target
+
+Notes
+
+Site conversion rate
+
+1.0–1.5%
+
+Realistic for a new jewelry DTC site; luxury AR-enabled sites cite higher, but that's Phase 2+
+
+Cart abandonment
+
+<70%
+
+High-value items naturally abandon more; retarget via WhatsApp/Meta
+
+Mobile share of traffic
+
+70%+
+
+Design mobile-first, not desktop-first
+
+Avg. order value (AOV)
+
+Track from month 1
+
+Used to size CAC ceiling
+
+4.2 Information Architecture (Sitemap)
+
+Home
+
+Shop → Collections → Category → Product Detail Page (PDP)
+
+The Motif (brand story page explaining the signature design)
+
+Purity & Provenance (the trust page — certificate explanation, karigar credits, NFC/DPP lookup in Phase 2+)
+
+Our Karigars (artisan storytelling — doubles as content marketing)
+
+Custom Orders / Bridal (lead-gen form, not full checkout — high-touch sales)
+
+Cart → Checkout → Order Confirmation
+
+Account (order history, wishlist)
+
+Journal/Blog (SEO + storytelling content)
+
+Contact / WhatsApp chat entry point
+
+4.3 Core Page Requirements
+
+Home
+
+Hero: single strongest campaign image, one clear CTA (Shop the Collection).
+
+Motif introduction strip — 3–4 pieces shown with the motif detail zoomed in.
+
+Trust strip: cadmium-free badge, purity certificate mention, karigar credit line.
+
+Social proof: Instagram feed embed or UGC strip.
+
+Product Detail Page (PDP)
+
+High-res image set (min. 6 angles) + one macro shot of the motif detail.
+
+Spec block: metal, purity (with certificate reference number), weight, gemstone info if applicable.
+
+Karigar credit (“Crafted by [name/atelier] in [location]”) — reinforces provenance story.
+
+Sizing guide (rings) and a simple size-comparison photo (coin/finger reference) in lieu of AR in Phase 1.
+
+WhatsApp “Ask about this piece” button — Nepali buyers convert heavily through chat; don't force everything through a Western-style cart flow.
+
+Purity & Provenance Page
+
+Explains lab-testing process, cadmium-free commitment, and how to verify a specific piece's certificate number.
+
+Phase 1: static explanation + manual certificate lookup (email/WhatsApp request).
+
+Phase 2: searchable certificate number field on this page, backed by a simple database — not blockchain.
+
+Checkout
+
+Guest checkout mandatory — do not force account creation.
+
+Local payment methods: eSewa, Khalti, Fonepay, plus COD (cash on delivery) since COD is still dominant in Nepali e-commerce and RTO (return-to-origin) risk needs a defined policy — e.g. partial deposit for COD orders above a set value.
+
+Clear, itemised delivery timeline by zone (Kathmandu Valley vs. outside valley vs. diaspora/international).
+
+4.4 Phase 1 (Launch) Feature Set — build this and nothing more
+
+Feature
+
+Why it's Phase 1
+
+Responsive e-commerce storefront (Shopify or WooCommerce)
+
+Fast to launch, low technical overhead for a non-technical founder using freelancers
+
+eSewa / Khalti / Fonepay + COD checkout
+
+Matches actual Nepali payment behaviour today
+
+Static purity/certificate page
+
+Delivers the trust message without database/NFC build cost
+
+WhatsApp Business chat integration
+
+Where Nepali buyers actually convert for high-value items
+
+Basic photography (real shoot, no AR/AI)
+
+Highest trust-per-rupee; buyers need to see real pieces
+
+DipArtha for inventory/showroom ops
+
+Already built for this exact market, IRD-recognised, low cost (NPR 30k–90k/yr)
+
+4.5 Phase 2 (Post-revenue) Feature Set
+
+NFC tag + database-backed provenance lookup (real DPP-lite, no blockchain).
+
+Basic AR try-on for rings/earrings via a mid-market tool (evaluate cost/SKU before committing — verify current vendor pricing directly rather than assuming; Threekit-class tools are enterprise-priced and only justified once catalogue and revenue support the per-SKU 3D-scanning cost).
+
+Email/SMS lifecycle marketing (abandoned cart, restock alerts, gifting-occasion reminders around Dashain/Tihar/wedding season).
+
+Loyalty / referral program (jewelry is gift-driven and high-referral by nature).
+
+4.6 Phase 3 (Scale) Feature Set
+
+Full blockchain-backed Digital Product Passport — only once you have the volume and international buyer base (diaspora, export) where third-party verification actually matters commercially.
+
+AI-assisted photorealistic catalogue renders for filler/variant SKUs (never for hero campaign imagery).
+
+In-house or dedicated CAD + 3D-print production line — once order volume justifies owning this instead of outsourcing to existing karigars/manufacturers.
+
+International shipping/customs-compliant checkout for diaspora markets (Gulf, US, Australia, UK).
+
+4.7 Non-Functional Requirements
+
+Mobile-first performance: sub-3-second load on 4G, since most Nepali mobile traffic is not on premium networks.
+
+Nepali + English bilingual site from day one.
+
+PCI-compliant payment handling via chosen gateway/aggregator; do not build custom payment handling.
+
+Basic SEO fundamentals (structured data on PDPs, sitemap, fast core web vitals) — organic search is a free CAC channel this market under-uses.
+
+5. Operations Stack
+
+5.1 Inventory & Showroom — DipArtha
+
+Use DipArtha (Autonomous Technology / Swordfish Technology) for day-to-day inventory, dual weight tracking (grams/tola), barcode billing, and karigar order tracking. It is IRD-recognised and already adopted by 200+ Kathmandu jewelers — low integration risk. Cost: roughly NPR 30,000–90,000/year depending on package, plus annual renewal.
+
+5.2 Order-to-Delivery Flow
+
+Order placed on website (prepaid via eSewa/Khalti/Fonepay, or COD with deposit above threshold) → order synced to DipArtha → pick/pack from showroom stock or routed to karigar for made-to-order pieces → quality check against certificate spec → dispatch via courier partner → delivery confirmation → post-delivery review/referral prompt.
+
+Custom/bridal orders route to a manual sales consultation (call/WhatsApp/showroom visit) rather than the standard checkout — high-touch, high-AOV, needs a human.
+
+6. Marketing & Advertising Strategy
+
+6.1 Channel Strategy
+
+Channel
+
+Role
+
+Phase
+
+Instagram / Facebook (organic + paid)
+
+Primary discovery channel; motif storytelling, karigar features, UGC
+
+Phase 1
+
+WhatsApp Business
+
+Conversion channel for high-value/consultative sales
+
+Phase 1
+
+Google Search (SEO + paid)
+
+Capture high-intent “jewelry shop Kathmandu” / gifting-occasion searches
+
+Phase 1–2
+
+Micro-influencers (Nepali fashion/lifestyle)
+
+Credibility + reach for younger segment; cheaper than celebrity endorsement
+
+Phase 1–2
+
+TikTok / Reels short-form video
+
+Motif/craft process content, behind-the-scenes karigar footage
+
+Phase 2
+
+Diaspora-targeted paid (Meta geo-targeting to Gulf/US/UK Nepali communities)
+
+Higher AOV export demand
+
+Phase 3
+
+6.2 Launch Campaign Concept
+
+“Not by weight. By design.” — a campaign built around the two pillars: the signature motif (design identity) and the purity guarantee (trust identity). Launch content directly contrasts old-model buying (priced by tola, no design identity, no purity guarantee) against the new model, without naming competitors.
+
+Hero video: karigar hands crafting the signature motif, cut with a customer wearing the finished piece.
+
+Launch collection sized deliberately small (8–12 SKUs) to keep photography, DipArtha setup, and cash-tied-up-in-inventory manageable.
+
+Seed via micro-influencers before paid spend — validate messaging cheaply before scaling ad budget.
+
+6.3 Content Pillars
+
+Craft & provenance: karigar profiles, making-of content, motif meaning.
+
+Trust: purity testing explainers, “what cadmium contamination actually is and why it matters” education content.
+
+Occasion-led: Dashain, Tihar, wedding season, engagement gifting guides.
+
+Social proof: real customer styling, UGC reposts, review highlights.
+
+6.4 Budget Allocation Guidance (indicative, not prescriptive)
+
+Category
+
+% of marketing budget
+
+Notes
+
+Photography/video production
+
+25–30%
+
+Highest-leverage spend at launch; underinvesting here undercuts everything else
+
+Paid social (Meta)
+
+30–35%
+
+Primary discovery + retargeting channel
+
+Influencer seeding
+
+15–20%
+
+Micro-influencers over celebrity at this stage
+
+Search (SEO/paid)
+
+10–15%
+
+Compounds over time; don't skip SEO fundamentals even if paid budget is thin
+
+Contingency/testing
+
+10%
+
+For creative testing and channel experiments
+
+These are directional starting points, not a media plan — actual allocation should shift within the first 60–90 days based on real CAC-by-channel data, not this table.
+
+6.5 CAC / LTV Discipline
+
+Set a maximum acceptable CAC per SKU tier before spending (e.g. entry-tier silver piece vs. bridal-tier gold piece will tolerate very different CAC).
+
+Track repeat purchase rate and referral rate explicitly — jewelry is gift-driven and high-referral; a referral program should be treated as a core growth channel, not an afterthought.
+
+Do not scale paid spend past Phase 1 budget until at least one full sales cycle of real CAC/AOV/repeat-rate data exists.
+
+7. Phased Roadmap & Budget Gates
+
+Phase
+
+Unlocks
+
+Gate to move to next phase
+
+Phase 1 — Launch
+
+Motif locked, brand identity, Shopify/Woo storefront, static trust page, WhatsApp, DipArtha, real photography, organic + light paid social
+
+≥ 1 full sales cycle of data: real conversion rate, CAC, AOV, repeat/referral rate
+
+Phase 2 — Post-revenue
+
+NFC/database provenance lookup, lifecycle marketing (email/SMS), loyalty/referral program, mid-market AR pilot on 1–2 SKUs only, TikTok/Reels content push
+
+Consistent positive unit economics across ≥ 2–3 sales cycles; enough SKU volume to justify AR scan cost
+
+Phase 3 — Scale
+
+Full blockchain DPP (only if exporting/diaspora demand justifies it), in-house CAD/3D-print production, diaspora-targeted international checkout, AI-assisted catalogue rendering
+
+Proven repeat export/diaspora demand and inventory volume that outgrows outsourced karigar/manufacturer capacity
+
+8. Risks & Open Questions
+
+COD/RTO risk: Nepali e-commerce still leans COD-heavy; needs a deposit or verification policy for high-value items to avoid return-to-origin losses eating margin.
+
+Inventory capital lock-up: jewelry ties up more cash per SKU than typical DTC goods — launch SKU count should stay deliberately small until sell-through data exists.
+
+NRB / import-export regulatory constraints on gold and silver may affect sourcing and, later, diaspora/export shipping — confirm current rules before committing to Phase 3 export plans.
+
+Vendor claims (AR conversion lift, AI rendering tools) in this space are often generic marketing stats, not Nepal-specific — re-validate actual vendor pricing and terms at the time of Phase 2/3 evaluation rather than assuming today's figures hold.
+
+Karigar capacity: confirm how many artisans can realistically support the launch collection's production timeline before finalising launch SKU count.

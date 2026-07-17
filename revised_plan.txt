@@ -1,0 +1,226 @@
+WEBSITE IMPLEMENTATION PLAN — REVISED
+
+Phase 1 Build Spec, Locked Decisions & Component Architecture
+
+For hand-off to development team
+
+1. Design Philosophy — Why This Reads as Premium Without Copying Tiffany/Cartier's Tech
+
+The brief is to look as good as or better than Tiffany, Cartier, Bulgari, and Louis Vuitton online. Their AR try-on and AI concierge layers are not what makes those sites feel premium — those are expensive add-ons built by conglomerates with dedicated engineering teams and licensed vendor tech (hand-tracking AR is a genuinely hard, expensive problem; even Cartier licenses it rather than building it in-house). What actually reads as premium, and what we can execute at Phase 1 budget with full craft quality, is:
+
+Typographic discipline and a consistent vertical rhythm — this is where template/AI-generated sites fail hardest, and it costs nothing but attention to detail.
+
+Real photography and film, shot deliberately, not stock or renders.
+
+A considered, consistent motion language applied everywhere (not just the hero).
+
+Two genuinely high-impact, achievable “wow” features detailed in Section 4 (360° spin viewer, scroll-driven motif story) that deliver a premium digital moment without requiring computer-vision R&D.
+
+This plan is built to hit that bar. AR try-on and AI-driven personalization are explicitly deferred — see Section 6 — not because they wouldn't look good, but because building them now would either blow the budget or produce a worse, janky version of what the luxury conglomerates ship, which undercuts the premium feel more than not having them at all.
+
+2. Locked Architecture Decisions
+
+2.1 Platform: Shopify (customized theme), not full headless
+
+Recommendation: fork Shopify's Dawn theme and heavily customize it with custom CSS/JS — not a headless Next.js build against the Storefront API.
+
+A deeply customized Shopify theme gets 85–90% of the bespoke, high-craft feel headless would deliver, at a fraction of the build time and ongoing maintenance burden.
+
+Headless architecture creates a permanent dependency on a developer for every future change — you cannot edit copy, swap a banner, or adjust a section yourself. That's a real ongoing cost for a solo, non-technical founder working with freelancers, not a one-time build cost.
+
+Only reconsider headless if a specific developer relationship is retained long-term (not a one-off freelance job) — revisit at Phase 2 if the business has outgrown theme-level customization.
+
+2.2 Styling: Vanilla CSS / CSS Modules
+
+Confirmed — no utility framework (Tailwind, Bootstrap). Full custom design tokens, hand-tuned spacing scale, and bespoke component styling. This is the right call for a bespoke, non-templated feel and is compatible with a customized Shopify theme (Shopify themes are plain HTML/Liquid/CSS/JS — no framework lock-in).
+
+2.3 Typography
+
+Role
+
+Typeface
+
+Licensing
+
+Headings
+
+Playfair Display
+
+Google Fonts — open license, free for commercial use, cleared
+
+Body / UI
+
+Inter
+
+Google Fonts — open license, free for commercial use, cleared
+
+2.4 Signature Motif
+
+Confirmed: build against a temporary placeholder motif (stylized geometric lotus) so development isn't blocked. Hard gate: the real motif must be finalized before final photography and production assets are locked — flag this back to the founder as a dependency, not a nice-to-have.
+
+3. Visual & Motion System
+
+3.1 Design Tokens
+
+:root {
+  --color-primary: #1B2A3A;   /* Deep Charcoal Navy */
+  --color-accent: #A87C2A;    /* Antique Gold */
+  --color-neutral: #F2EDE4;   /* Warm Ivory */
+  --color-support: #5B5B5B;   /* Slate Grey */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+
+  --space-1: 4px; --space-2: 8px; --space-3: 16px;
+  --space-4: 24px; --space-5: 40px; --space-6: 64px; --space-7: 96px;
+
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+}
+
+3.2 Motion Language (the actual "premium" ingredient)
+
+One easing curve (--ease-premium) used everywhere — never mix easing functions across the site; inconsistency is what makes sites feel templated.
+
+Image reveals: subtle fade + 4% scale-down on load, never a jarring pop-in.
+
+Hover states on product cards: slow, deliberate cross-fade to a second angle (400ms), not an instant swap.
+
+Scroll-triggered reveals on story/motif sections, staggered by 60–80ms per element — restrained, not busy.
+
+Page transitions: soft fade, no slide/bounce gimmicks.
+
+3.3 Spacing & Grid
+
+Strict 8px base spacing scale (tokens above). No ad-hoc margins/padding values — this single discipline is responsible for a large share of what separates “hand-crafted” from “AI-templated” sites.
+
+4. Feature Spec (Phase 1 — Full Detail)
+
+4.1 Home
+
+HeroSection: single strongest campaign image/film loop, one CTA, generous negative space (no clutter).
+
+MotifShowcase: macro zoom animation on the signature motif, scroll-triggered.
+
+Curated ProductCard grid with the cross-fade hover behavior above.
+
+TrustBadge strip: “Cadmium-Free” and “Karigar Crafted”, understated, not banner-style.
+
+4.2 Product Detail Page (PDP)
+
+Image gallery: minimum 6 angles + 1 motif macro shot.
+
+NEW — 360° Spin Viewer: a stitched-stills spin viewer (24–36 real photographed frames per SKU, not live 3D/AR) that the user drags to rotate. This is the single highest-impact “wow” feature achievable at Phase 1 budget — it delivers the “I can see it from every angle” feeling Tiffany's AR gives, using only a photo rig and a lightweight JS component, no computer vision required.
+
+Spec block: metal, purity + certificate reference, weight, karigar credit.
+
+Two CTAs: "Add to Cart" and "Ask about this piece" (WhatsApp, pre-filled with product context).
+
+4.3 NEW — The Motif / Craft Story Page
+
+A dedicated scroll-driven storytelling page (parallax image reveals, animated motif line-work, karigar process footage) explaining the signature motif's meaning and the making-of process. This is the page that should feel like a luxury digital campaign — it is a standard, well-understood frontend build pattern (comparable to editorial/campaign pages agencies build for fashion brands) and does not require any special vendor tech.
+
+4.4 Purity & Provenance (Static)
+
+Explains lab-testing process and cadmium-free commitment.
+
+Manual certificate lookup via WhatsApp/email request (Phase 1); becomes a searchable database field in Phase 2.
+
+4.5 Our Karigars
+
+Individual artisan profiles with photography and short process video — reinforces provenance and doubles as content marketing.
+
+4.6 Checkout
+
+Guest checkout, multi-step, no forced account creation.
+
+eSewa, Khalti, Fonepay, and COD (with deposit rule above a set order value to manage RTO risk).
+
+5. Component Library (/src/components or theme sections)
+
+Component
+
+Notes
+
+Navigation
+
+Sticky header, mobile hamburger, cart drawer
+
+HeroSection
+
+Image/film loop, single CTA
+
+MotifShowcase
+
+Scroll-triggered macro zoom on signature motif
+
+SpinViewer (NEW)
+
+Drag-to-rotate stitched-stills viewer, per-SKU photo set
+
+ScrollStory (NEW)
+
+Parallax storytelling module for the Motif/Craft page
+
+TrustBadge
+
+Cadmium-free / karigar-crafted banner, understated styling
+
+ProductCard
+
+Grid item, cross-fade hover to second angle
+
+WhatsAppButton
+
+Floating/inline CTA, pre-filled product context
+
+6. Explicitly Deferred to Phase 2/3 — and Why
+
+Feature
+
+Reason it's deferred
+
+AR ring/hand try-on (Tiffany/Cartier/Bulgari style)
+
+Hand-pose AR is a genuinely hard computer-vision problem; even these brands license it from specialist vendors rather than building in-house. Attempting a cut-rate version now would look worse than not having it, undercutting the premium goal.
+
+AI concierge / personalized recommendations (LV, Burberry style)
+
+Requires real behavioral data volume to train/tune — there's no meaningful data yet at launch. A generic “AI chatbot” bolted onto a new site reads as gimmicky, not premium.
+
+Full charm-builder style configurator (Pandora style)
+
+Only relevant if the product line includes a modular/customizable format; revisit if the collection strategy moves that direction.
+
+The gate to revisit any of these: real sales data, a defined budget for licensed AR/AI vendor tools, and (for AR specifically) confirmed per-SKU 3D-scanning costs from a vendor — not before.
+
+7. Verification Plan
+
+7.1 Automated
+
+npm run lint / npm run typecheck (or Shopify theme-check if built on Dawn).
+
+7.2 Manual
+
+Lighthouse performance test — target sub-3-second load on simulated 4G.
+
+Responsiveness check at 320px, 375px, 414px, tablet, and desktop breakpoints.
+
+Motion/aesthetic review against Section 3 — confirm one consistent easing curve and spacing scale are used throughout, no ad-hoc values.
+
+SpinViewer and ScrollStory components tested specifically on mid-range Android devices (the realistic customer device profile), not just high-end test phones.
+
+8. Summary of Decisions to Send Back to the Dev Team
+
+Platform: customized Shopify theme (Dawn fork), not headless — revisit headless only if a long-term dev relationship is in place.
+
+Styling: Vanilla CSS/CSS Modules, confirmed.
+
+Fonts: Playfair Display + Inter, both cleared.
+
+Motif: build against placeholder now; real motif is a hard gate before final production assets.
+
+Add: 360° SpinViewer on PDP, ScrollStory motif/craft page — these are the two features that deliver the “wow” factor within Phase 1 budget.
+
+Drop: AR try-on and AI concierge from Phase 1 scope entirely — explicitly deferred, not forgotten.
