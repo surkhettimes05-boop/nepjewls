@@ -83,8 +83,8 @@ export default function Navigation() {
           
           {/* Right Navigation (Desktop) */}
           <div className="hidden lg:flex gap-32 items-center justify-end">
-            <Link href="/journal" className={linkClasses}>
-              <span>Journal</span>
+            <Link href="/about" className={linkClasses}>
+              <span>Heritage</span>
               <span className="absolute -bottom-2 left-0 w-full h-px bg-luxury-text transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
             </Link>
             <Link href="/account" className={linkClasses}>
@@ -118,7 +118,7 @@ export default function Navigation() {
               <Link href="/collections" className="font-serif text-4xl" onClick={() => setIsMenuOpen(false)}>Collections</Link>
               <Link href="/bridal" className="font-serif text-4xl" onClick={() => setIsMenuOpen(false)}>Bridal</Link>
               <Link href="/craftsmanship" className="font-serif text-4xl" onClick={() => setIsMenuOpen(false)}>Craftsmanship</Link>
-              <Link href="/journal" className="font-serif text-4xl" onClick={() => setIsMenuOpen(false)}>Journal</Link>
+              <Link href="/about" className="font-serif text-4xl" onClick={() => setIsMenuOpen(false)}>Heritage</Link>
               <Link href="/account" className="font-serif text-4xl" onClick={() => setIsMenuOpen(false)}>Account</Link>
             </div>
           </motion.div>
