@@ -35,7 +35,7 @@ export default async function ProductPage({ params }: { params: Promise<{ sku: s
     notFound();
   }
 
-  // Fetch 3 related products (random or same category)
+  // Fetch 3 related products
   const relatedProducts = await prisma.product.findMany({
     where: { 
       id: { not: product.id },
@@ -44,7 +44,6 @@ export default async function ProductPage({ params }: { params: Promise<{ sku: s
     take: 3
   });
 
-  // If we don't have enough in the same category, just fetch any
   const finalRelated = relatedProducts.length > 0 ? relatedProducts : await prisma.product.findMany({
     where: { id: { not: product.id } },
     take: 3
@@ -55,35 +54,41 @@ export default async function ProductPage({ params }: { params: Promise<{ sku: s
       <Navigation />
       
       {/* Editorial Split Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
-        {/* Left Side: Sticky Image */}
-        <div className="relative h-[60vh] lg:h-screen lg:sticky top-0 overflow-hidden">
+      <div className="grid grid-cols-1 xl:grid-cols-2 min-h-screen">
+        
+        {/* Left Side: Sticky Atmospheric Image */}
+        <div className="relative h-[65vh] xl:h-screen xl:sticky top-0 overflow-hidden bg-[#1A1614]">
           <img 
             src={product.image} 
             alt={product.name} 
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-[3s] ease-out hover:scale-105"
+            className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-[3s] ease-[cubic-bezier(0.85,0,0.15,1)] hover:scale-[1.03]"
           />
+          {/* Atmospheric Vignette overlay to blend edge into the dark background */}
+          <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-luxury-bg/80 z-10 pointer-events-none"></div>
+          {/* Subtle gradient specifically fading out the right edge on desktop */}
+          <div className="hidden xl:block absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-luxury-bg to-transparent z-10 pointer-events-none"></div>
         </div>
 
         {/* Right Side: Product Information */}
-        <div className="flex flex-col justify-center px-8 lg:px-24 py-24 lg:py-40">
-          <span className="tracking-nav text-luxury-text-secondary text-[11px] mb-8 uppercase">
+        <div className="flex flex-col justify-center px-8 lg:px-24 xl:px-32 py-24 xl:py-40 relative z-20 bg-luxury-bg">
+          
+          <span className="tracking-[0.4em] text-[#8C857B] text-[10px] mb-8 uppercase font-light">
             {product.category}
           </span>
           
-          <h1 className="font-serif text-5xl lg:text-7xl leading-[0.9] mb-8">
+          <h1 className="font-serif text-6xl xl:text-[80px] leading-[1.0] mb-12 tracking-[-0.02em]">
             {product.name}
           </h1>
           
-          <div className="font-light text-2xl mb-12">
+          <div className="font-light text-[#8C857B] text-xl mb-16 tracking-wide">
             Rs. {product.price.toLocaleString()}
           </div>
           
-          <p className="text-luxury-text-secondary font-light text-lg leading-relaxed mb-16 max-w-lg">
+          <p className="text-[#E5E0D8] font-light text-lg leading-[1.8] mb-24 max-w-lg opacity-90">
             {product.description}
           </p>
 
-          <div className="mb-24">
+          <div className="mb-32">
             <AddToCartButton 
               product={{
                 id: product.id,
@@ -95,41 +100,58 @@ export default async function ProductPage({ params }: { params: Promise<{ sku: s
             />
           </div>
 
-          {/* Details Accordion (Static for now) */}
-          <div className="border-t hairline-border-t">
-            <div className="py-6 border-b hairline-border-b flex justify-between items-center cursor-pointer group">
-              <span className="tracking-nav text-[12px] uppercase">Artisan Details</span>
-              <span className="text-luxury-gold transition-transform group-hover:rotate-180">+</span>
+          {/* Details Accordion (Sharp Hairlines) */}
+          <div className="border-t border-white/10 w-full max-w-lg">
+            <div className="py-8 border-b border-white/10 flex justify-between items-center cursor-pointer group">
+              <span className="tracking-[0.3em] text-[11px] uppercase text-[#8C857B] group-hover:text-white transition-colors duration-500">Provenance & Craft</span>
+              <span className="text-[#D4AF37] transition-transform duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:rotate-180">+</span>
             </div>
-            <div className="py-6 border-b hairline-border-b flex justify-between items-center cursor-pointer group">
-              <span className="tracking-nav text-[12px] uppercase">Shipping & Returns</span>
-              <span className="text-luxury-gold transition-transform group-hover:rotate-180">+</span>
+            <div className="py-8 border-b border-white/10 flex justify-between items-center cursor-pointer group">
+              <span className="tracking-[0.3em] text-[11px] uppercase text-[#8C857B] group-hover:text-white transition-colors duration-500">Secure Delivery</span>
+              <span className="text-[#D4AF37] transition-transform duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:rotate-180">+</span>
             </div>
-            <div className="py-6 border-b hairline-border-b flex justify-between items-center cursor-pointer group">
-              <span className="tracking-nav text-[12px] uppercase">Lifetime Warranty</span>
-              <span className="text-luxury-gold transition-transform group-hover:rotate-180">+</span>
+            <div className="py-8 border-b border-white/10 flex justify-between items-center cursor-pointer group">
+              <span className="tracking-[0.3em] text-[11px] uppercase text-[#8C857B] group-hover:text-white transition-colors duration-500">Legacy Maintenance</span>
+              <span className="text-[#D4AF37] transition-transform duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:rotate-180">+</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Related Products */}
-      <section className="py-luxury-7 px-8 max-w-[1800px] mx-auto">
-        <h2 className="text-section-title font-serif text-center mb-24">You May Also Admire</h2>
+      {/* Related Products - Editorial Staggered Layout */}
+      <section className="py-40 px-8 max-w-[1800px] mx-auto">
+        <div className="text-center mb-32">
+          <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.02em]">You May Also Admire</h2>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {finalRelated.map((related) => (
-            <Link href={`/product/${related.sku}`} key={related.id} className="group block cursor-none">
-              <div className="relative aspect-[3/4] overflow-hidden mb-8" data-cursor="view">
-                <img src={related.image} alt={related.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 z-10" />
-              </div>
-              
-              <div className="flex flex-col text-center">
-                <h3 className="font-serif text-2xl mb-2">{related.name}</h3>
-                <span className="text-luxury-text font-light">Rs. {related.price.toLocaleString()}</span>
-              </div>
-            </Link>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-24">
+          {finalRelated.map((related, index) => {
+            const isStaggered = index === 1; // Drop the middle item
+            
+            return (
+              <Link 
+                href={`/product/${related.sku}`} 
+                key={related.id} 
+                className={`group block cursor-none ${isStaggered ? 'md:mt-32' : ''}`}
+              >
+                <div className="relative aspect-[3/4] overflow-hidden mb-8 bg-[#1A1614] border border-white/5" data-cursor="view">
+                  <img 
+                    src={related.image} 
+                    alt={related.name} 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:scale-[1.03] z-10 opacity-90 group-hover:opacity-100 grayscale-[20%] group-hover:grayscale-0" 
+                  />
+                </div>
+                
+                <div className="flex flex-col items-center text-center">
+                  <h3 className="font-serif text-2xl mb-3 inline-block relative w-max">
+                    {related.name}
+                    <span className="absolute -bottom-1 left-0 w-full h-px bg-[#E5E0D8] transform scale-x-0 origin-left transition-transform duration-[1200ms] ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:scale-x-100"></span>
+                  </h3>
+                  <span className="text-[#8C857B] font-light text-sm tracking-wide">Rs. {related.price.toLocaleString()}</span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
