@@ -4,45 +4,51 @@ const prisma = new PrismaClient()
 
 const initialProducts = [
   {
-    sku: 'lotus-1',
-    name: 'The Signature Lotus',
-    price: 150000,
-    description: 'A masterpiece of Newari craftsmanship. 24k pure gold hand-beaten into the eternal lotus motif.',
-    image: '/images/product_ring_heritage_1784294279552.jpg',
+    sku: 'nep-signet-01',
+    name: 'The Kathmandu Signet',
+    price: 850000,
+    description: 'A masterclass in restraint. This piece balances the raw, grounding power of Himalayan gold with the exactitude of modern geometry. Forged over 140 hours in our Patan atelier.',
+    image: '/images/product_signet_ring_1784343759398.jpg',
     has360: true,
-    category: 'High Jewelry'
+    category: 'The Architectural Collection'
   },
   {
-    sku: 'diamond-2',
-    name: 'Kathmandu Diamond Ring',
-    price: 320000,
-    description: 'A brilliant cut diamond set in our signature cadmium-free 18k gold band.',
-    image: '/images/product_ring_diamond_1784294289832.jpg',
+    sku: 'nep-bridal-01',
+    name: 'The Solitaire Diamond',
+    price: 2100000,
+    description: 'An uncompromising brilliant-cut diamond, suspended in pure darkness. The setting is minimal to the point of invisibility, allowing the stone to hold the light with absolute authority.',
+    image: '/images/product_solitaire_diamond_1784343770631.jpg',
     has360: false,
     category: 'Bridal'
   },
   {
-    sku: 'pendant-3',
-    name: 'Eternal Lotus Pendant',
-    price: 85000,
-    description: 'The iconic lotus motif suspended on a delicate 18k gold chain.',
-    image: '/images/product_pendant_lotus_1784294299204.jpg',
-    has360: false,
-    category: 'The Signature Lotus'
-  },
-  {
-    sku: 'bangle-4',
-    name: 'Royal Gold Bangle',
-    price: 210000,
-    description: 'A heavy solid gold bangle featuring intricate handcrafted details from the Patan workshops.',
-    image: '/images/product_bangle_gold_1784294317394.jpg',
+    sku: 'nep-bangle-01',
+    name: 'The Raw Sapphire Bangle',
+    price: 1450000,
+    description: 'Forged in the shadows of the Himalayas. Solid 24k gold, brutally hammered and stacked with uncut sapphires. A piece of wearable armor that commands attention without raising its voice.',
+    image: '/images/product_hammered_bangle_1784343780875.jpg',
     has360: false,
     category: 'High Jewelry'
+  },
+  {
+    sku: 'nep-pendant-01',
+    name: 'The Shadow Lotus Pendant',
+    price: 620000,
+    description: 'The ancient Newari lotus motif reimagined through a lens of brutalist restraint. Cast in shadow, catching a single sliver of light to reveal its mathematical perfection.',
+    image: '/images/product_lotus_pendant_1784343791427.jpg',
+    has360: false,
+    category: 'The Signature Lotus'
   }
 ]
 
 async function main() {
-  console.log('Start seeding...')
+  console.log('Clearing old inventory...')
+  // Clean up order items that might reference old products
+  await prisma.orderItem.deleteMany()
+  // Clean up old products
+  await prisma.product.deleteMany()
+
+  console.log('Seeding The Inaugural Collection...')
   for (const p of initialProducts) {
     const product = await prisma.product.upsert({
       where: { sku: p.sku },
@@ -56,9 +62,9 @@ async function main() {
       },
       create: p,
     })
-    console.log(`Created product with id: ${product.id}`)
+    console.log(`Secured masterpiece in vault: ${product.name}`)
   }
-  console.log('Seeding finished.')
+  console.log('Vault sealed.')
 }
 
 main()
