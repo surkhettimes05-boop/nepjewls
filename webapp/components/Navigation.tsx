@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import Logo from './Logo';
 
 export default function Navigation() {
   const { cartCount, isMounted } = useCart();
@@ -35,7 +36,7 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navClasses = `fixed top-0 left-0 w-full z-50 py-8 transition-transform duration-[800ms] ease-[cubic-bezier(0.85,0,0.15,1)] ${
+  const navClasses = `fixed top-0 left-0 w-full z-50 py-6 md:py-8 transition-transform duration-[800ms] ease-[cubic-bezier(0.85,0,0.15,1)] ${
     hidden && !isMenuOpen ? '-translate-y-full' : 'translate-y-0'
   }`;
 
@@ -44,7 +45,7 @@ export default function Navigation() {
   }`;
 
   const linkClasses = `uppercase tracking-[0.4em] font-light text-[10px] text-luxury-text/70 hover:text-luxury-text relative group cursor-pointer transition-colors duration-300`;
-  const logoClasses = `font-serif text-3xl md:text-4xl tracking-[0.25em] text-center flex-1 transition-colors duration-[900ms] ease-out text-luxury-text`;
+  const logoClasses = `text-center flex-1 transition-colors duration-[900ms] ease-out text-luxury-text group cursor-pointer`;
 
   return (
     <>
@@ -76,7 +77,7 @@ export default function Navigation() {
           {/* Center Logo */}
           <div className="flex justify-center">
             <Link href="/" className={logoClasses}>
-              NepJewls
+              <Logo />
             </Link>
           </div>
           
