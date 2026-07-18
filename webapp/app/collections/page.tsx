@@ -21,7 +21,7 @@ export default async function CollectionsPage() {
         <FadeInReveal delay={0.2} duration={1.4}>
           <div className="text-center mb-40">
             <span className="tracking-[0.4em] text-[#8C857B] text-[10px] mb-12 block uppercase font-light">
-              Curated For You
+              The Curation
             </span>
             <h1 className="font-serif text-6xl md:text-[96px] leading-[1.1] tracking-[-0.02em]">
               The Masterpieces

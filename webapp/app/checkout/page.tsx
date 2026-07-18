@@ -76,7 +76,8 @@ export default function CheckoutPage() {
       
       <div className="max-w-[1200px] mx-auto px-8 pt-40 pb-24 grid grid-cols-1 lg:grid-cols-2 gap-16">
         <div>
-          <h1 className="font-serif text-5xl mb-12">Secure Checkout</h1>
+          <h1 className="font-serif text-5xl mb-6">Secure Your Legacy</h1>
+          <p className="text-luxury-text-secondary font-light mb-12">Your acquisition is being finalized. Please provide your secure details below.</p>
           
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="space-y-6">
@@ -142,7 +143,7 @@ export default function CheckoutPage() {
               disabled={loading || cart.length === 0}
               className="w-full tracking-btn text-[14px] uppercase border border-luxury-text px-12 py-5 text-luxury-text hover:bg-luxury-text hover:text-luxury-bg transition-colors duration-[400ms] disabled:opacity-50 mt-12"
             >
-              {loading ? 'Processing...' : `Pay Rs. ${cartTotal.toLocaleString()}`}
+              {loading ? 'Processing...' : `Acquire for Rs. ${cartTotal.toLocaleString()}`}
             </button>
           </form>
         </div>

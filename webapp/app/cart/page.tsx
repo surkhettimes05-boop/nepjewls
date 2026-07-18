@@ -16,14 +16,16 @@ export default function CartPage() {
       <Navigation />
       
       <div className="flex-1 max-w-[1400px] mx-auto w-full px-8 pt-40 pb-24">
-        <h1 className="font-serif text-5xl md:text-7xl mb-16 border-b hairline-border-b pb-8">Your Bag</h1>
+        <h1 className="font-serif text-5xl md:text-7xl mb-16 border-b hairline-border-b pb-8">
+          {cart.length === 0 ? 'Your Vault is Empty' : 'Your Selected Acquisitions'}
+        </h1>
         
         {cart.length === 0 ? (
           <div className="text-center py-32">
-            <p className="text-luxury-text-secondary font-light text-xl mb-12">Your bag is currently empty.</p>
-            <Link href="/">
+            <p className="text-luxury-text-secondary font-light text-xl mb-12">A blank canvas awaits. Discover masterpieces that will become the anchor of your legacy.</p>
+            <Link href="/collections">
               <MagneticButton>
-                <span className="tracking-btn text-[14px] uppercase border border-luxury-gold px-12 py-5 text-luxury-gold hover:bg-luxury-gold/5 inline-block transition-colors duration-[400ms] cursor-pointer">
+                <span className="tracking-[0.2em] text-[12px] uppercase border border-luxury-gold px-12 py-5 text-luxury-gold hover:bg-luxury-gold/5 inline-block transition-colors duration-[400ms] cursor-pointer">
                   Discover Masterpieces
                 </span>
               </MagneticButton>
@@ -81,8 +83,8 @@ export default function CartPage() {
                 
                 <Link href="/checkout" className="block w-full">
                   <MagneticButton>
-                    <span className="w-full tracking-btn text-[14px] uppercase bg-luxury-text text-luxury-bg border border-luxury-text px-12 py-5 flex items-center justify-center hover:bg-transparent hover:text-luxury-text transition-colors duration-[400ms] cursor-pointer">
-                      Proceed to Checkout
+                    <span className="w-full tracking-[0.2em] text-[12px] uppercase bg-[#E5E0D8] text-[#1A1614] border border-[#E5E0D8] px-12 py-5 flex items-center justify-center hover:bg-transparent hover:text-[#E5E0D8] transition-colors duration-[600ms] cursor-pointer">
+                      Secure Your Legacy
                     </span>
                   </MagneticButton>
                 </Link>

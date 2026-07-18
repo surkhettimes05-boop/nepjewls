@@ -17,16 +17,21 @@ export default function Footer() {
         </div>
 
         {/* Minimal Links */}
-        <div className="flex flex-col md:flex-row gap-12 md:gap-24 mb-32">
-          <Link href="#" className="tracking-nav text-[12px] uppercase hover:text-luxury-gold transition-colors duration-luxury-base cursor-none">Instagram</Link>
-          <Link href="#" className="tracking-nav text-[12px] uppercase hover:text-luxury-gold transition-colors duration-luxury-base cursor-none">Journal</Link>
-          <Link href="#" className="tracking-nav text-[12px] uppercase hover:text-luxury-gold transition-colors duration-luxury-base cursor-none">Appointments</Link>
+        <div className="flex flex-col md:flex-row gap-12 md:gap-24 mb-24">
+          <Link href="#" className="tracking-nav text-[12px] uppercase hover:text-luxury-gold transition-colors duration-luxury-base cursor-none">Legacy Maintenance</Link>
+          <Link href="#" className="tracking-nav text-[12px] uppercase hover:text-luxury-gold transition-colors duration-luxury-base cursor-none">Certificate of Provenance</Link>
+          <Link href="#" className="tracking-nav text-[12px] uppercase hover:text-luxury-gold transition-colors duration-luxury-base cursor-none">Private Advisory</Link>
+        </div>
+
+        {/* Brand Statement */}
+        <div className="mb-24 font-serif text-3xl md:text-5xl tracking-wide">
+          Eternity, Realized.
         </div>
 
         {/* Legal */}
-        <div className="w-full flex flex-col items-center text-luxury-text-secondary text-[11px] tracking-widest gap-4">
-          <p>© {new Date().getFullYear()} NepJewls. Handcrafted in Nepal.</p>
-          <div className="flex gap-8">
+        <div className="w-full flex flex-col items-center text-luxury-text-secondary text-[11px] tracking-[0.2em] gap-4 uppercase">
+          <p>Handcrafted in Nepal. Worn globally.</p>
+          <div className="flex gap-8 mt-4">
             <Link href="#" className="hover:text-luxury-text transition-colors cursor-none">Privacy</Link>
             <Link href="#" className="hover:text-luxury-text transition-colors cursor-none">Terms</Link>
           </div>

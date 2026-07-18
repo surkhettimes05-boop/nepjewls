@@ -68,7 +68,7 @@ export default function Home() {
             className="font-serif text-luxury-text tracking-tight mb-10 drop-shadow-[0_4px_32px_rgba(255,255,255,0.7)]"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', lineHeight: '1.25' }}
           >
-            Timeless Beauty, Crafted in Nepal.
+            Forged in the Shadows of the Himalayas.
           </motion.h1>
 
           <motion.p
@@ -77,7 +77,7 @@ export default function Home() {
             transition={{ duration: 1.8, delay: 1.0, ease: "easeOut" }}
             className="text-[20px] font-light max-w-lg text-[#3a3530] leading-[1.8] drop-shadow-sm"
           >
-            Heirlooms forged in the heart of the Himalayas. We do not merely shape gold and diamond—we curate living legacies crafted to bear witness to your most profound moments.
+            Where ancient Newari mastery meets modern architectural restraint. We do not manufacture jewelry; we curate eternal legacies.
           </motion.p>
           
           <motion.div
@@ -88,12 +88,12 @@ export default function Home() {
           >
             <MagneticButton>
               <Link href="/collections" className="tracking-[0.2em] text-[12px] uppercase bg-luxury-text text-luxury-bg px-14 py-5 hover:bg-luxury-gold transition-colors duration-[600ms] flex items-center justify-center group cursor-pointer">
-                Explore Collections
+                Explore The Masterpieces
               </Link>
             </MagneticButton>
             
             <Link href="/account" className="tracking-[0.15em] text-[12px] uppercase text-luxury-text hover:text-luxury-gold transition-colors duration-[600ms] relative group py-2">
-              Book Private Appointment
+              Request Private Viewing
               <span className="absolute bottom-0 left-0 w-full h-px bg-luxury-text transform scale-x-0 origin-left transition-transform duration-[600ms] group-hover:scale-x-100"></span>
             </Link>
           </motion.div>
@@ -107,13 +107,11 @@ export default function Home() {
           className="absolute bottom-16 z-20 w-full flex justify-center"
         >
           <div className="flex items-center text-[10px] uppercase tracking-[0.3em] text-[#3a3530] text-center">
-            <span className="px-6">Certified Gold</span>
+            <span className="px-6">Certified Provenance</span>
             <span className="hidden sm:inline opacity-30">|</span>
-            <span className="px-6">Lifetime Craftsmanship</span>
+            <span className="px-6">Conflict-Free Diamonds</span>
             <span className="hidden md:inline opacity-30">|</span>
-            <span className="hidden md:inline px-6">Handmade in Nepal</span>
-            <span className="hidden lg:inline opacity-30">|</span>
-            <span className="hidden lg:inline px-6">Secure Delivery</span>
+            <span className="hidden md:inline px-6">Lifetime Legacy Maintenance</span>
           </div>
         </motion.div>
       </section>
@@ -123,10 +121,10 @@ export default function Home() {
         <FadeInReveal>
           <span className="tracking-[0.25em] text-luxury-text-secondary mb-12 block text-[10px] uppercase">The Heritage</span>
           <h2 className="text-section-title md:text-[72px] font-serif leading-[1.1] max-w-[900px] mx-auto text-luxury-text">
-            Jewelry should outlive trends.
+            A Secret Kept for Centuries.
           </h2>
           <p className="text-paragraph font-light text-luxury-text-secondary mt-12 max-w-2xl mx-auto leading-relaxed">
-            Every NepJewls creation is handcrafted by artisans carrying generations of Nepalese craftsmanship. We do not manufacture; we sculpt light into gold.
+            In the hidden courtyards of the Kathmandu Valley, master karigars have forged gold for deities, emperors, and kings using techniques passed down in unbroken lineages. NepJewls was born to unveil this ancient mastery to the modern world. We take the spiritual depth and raw perfection of Himalayan craftsmanship and distill it into uncompromising, contemporary elegance.
           </p>
           <div className="mt-16">
             <Link href="/craftsmanship" className="tracking-[0.15em] text-[11px] uppercase text-luxury-text border-b border-luxury-text pb-1 hover:text-luxury-gold hover:border-luxury-gold transition-colors duration-500">
@@ -140,8 +138,8 @@ export default function Home() {
       <section className="py-40 px-8 max-w-[1800px] mx-auto">
         <FadeInReveal>
           <div className="text-center mb-32">
-            <span className="tracking-[0.25em] text-luxury-text-secondary mb-8 block text-[10px] uppercase">Curated Masterpieces</span>
-            <h2 className="text-section-title font-serif text-luxury-text">The Collections</h2>
+            <span className="tracking-[0.25em] text-luxury-text-secondary mb-8 block text-[10px] uppercase">The Signatures</span>
+            <h2 className="text-section-title font-serif text-luxury-text">The Icons</h2>
           </div>
         </FadeInReveal>
 
@@ -186,13 +184,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Authenticity & Care (Trust Sections) */}
+      {/* 4. Craftsmanship (The Process) */}
       <section className="py-40 bg-luxury-dark text-white">
         <div className="max-w-[1400px] mx-auto px-8">
           <FadeInReveal>
             <div className="text-center mb-24">
-              <span className="tracking-[0.25em] text-luxury-gold mb-8 block text-[10px] uppercase">Uncompromising Standards</span>
-              <h2 className="text-section-title font-serif">A Promise of Eternity</h2>
+              <span className="tracking-[0.25em] text-luxury-gold mb-8 block text-[10px] uppercase">The Process</span>
+              <h2 className="text-section-title font-serif">The Weight of Perfection</h2>
             </div>
           </FadeInReveal>
 
@@ -200,9 +198,9 @@ export default function Home() {
             <FadeInReveal delay={0.1}>
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 border border-luxury-gold/30 rounded-full flex items-center justify-center mb-8 text-luxury-gold text-2xl font-serif">I</div>
-                <h3 className="font-serif text-3xl mb-4">GIA Certified</h3>
+                <h3 className="font-serif text-3xl mb-4">Forged in Silence</h3>
                 <p className="font-light text-white/60 leading-relaxed max-w-xs mx-auto">
-                  Every diamond over 0.5 carats is accompanied by a GIA grading report, ensuring the highest standards of integrity.
+                  We reject the sterile speed of mass production. Every NepJewls piece is born from fire and absolute silence.
                 </p>
               </div>
             </FadeInReveal>
@@ -210,9 +208,9 @@ export default function Home() {
             <FadeInReveal delay={0.3}>
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 border border-luxury-gold/30 rounded-full flex items-center justify-center mb-8 text-luxury-gold text-2xl font-serif">II</div>
-                <h3 className="font-serif text-3xl mb-4">Lifetime Warranty</h3>
+                <h3 className="font-serif text-3xl mb-4">Ancient Secrets</h3>
                 <p className="font-light text-white/60 leading-relaxed max-w-xs mx-auto">
-                  We stand by our craftsmanship. Complimentary cleaning, prong checks, and polishing for the lifetime of your piece.
+                  Our karigars spend hundreds of hours coaxing raw metal into fluid geometry, utilizing metallurgical secrets preserved for generations.
                 </p>
               </div>
             </FadeInReveal>
@@ -220,9 +218,9 @@ export default function Home() {
             <FadeInReveal delay={0.5}>
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 border border-luxury-gold/30 rounded-full flex items-center justify-center mb-8 text-luxury-gold text-2xl font-serif">III</div>
-                <h3 className="font-serif text-3xl mb-4">Maison Packaging</h3>
+                <h3 className="font-serif text-3xl mb-4">Human Devotion</h3>
                 <p className="font-light text-white/60 leading-relaxed max-w-xs mx-auto">
-                  Presented in our signature handcrafted wooden boxes, sealed with wax, reflecting the gravity of the treasure inside.
+                  You are not buying a simple accessory; you are inheriting a physical manifestation of uncompromising human devotion.
                 </p>
               </div>
             </FadeInReveal>
@@ -230,36 +228,43 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Editorial Press (Trust) */}
+      {/* 5. Reviews */}
       <section className="py-32 px-8 bg-luxury-bg border-b hairline-border-b">
         <div className="max-w-[1400px] mx-auto text-center">
           <FadeInReveal>
+            <span className="tracking-[0.25em] text-luxury-text-secondary mb-12 block text-[10px] uppercase">Quiet Acclaim</span>
             <p className="font-serif text-3xl md:text-5xl max-w-4xl mx-auto leading-[1.3] text-luxury-text mb-16">
-              "NepJewls is quietly redefining high jewelry by returning to the slow, painstaking methods of the ancient Newari masters."
+              "It does not feel like jewelry. It feels like armor. The weight and the finish are unlike anything I have purchased in Paris or Geneva."
             </p>
             <span className="tracking-[0.25em] text-luxury-text-secondary text-[11px] uppercase">
-              — The Editorial Standard
+              — A.D., Private Client
             </span>
           </FadeInReveal>
         </div>
       </section>
 
-      {/* 6. Private Consultation (High-Touch Close) */}
+      {/* 6. The Newsletter (Lead Capture) */}
       <section className="py-40 px-8 text-center bg-luxury-bg-secondary">
         <FadeInReveal>
           <div className="max-w-2xl mx-auto">
-            <span className="tracking-[0.25em] text-luxury-text-secondary mb-12 block text-[10px] uppercase">Bespoke Services</span>
+            <span className="tracking-[0.25em] text-luxury-text-secondary mb-12 block text-[10px] uppercase">The Inner Circle</span>
             <h2 className="font-serif text-5xl md:text-7xl mb-12 text-luxury-text">
-              Commission a Masterpiece
+              An Invitation to the Exclusive
             </h2>
             <p className="text-paragraph font-light text-luxury-text-secondary mb-16 max-w-lg mx-auto">
-              Work directly with our master artisans to bring your most intimate visions to life in pure gold and conflict-free diamonds.
+              Join our private ledger to receive privileged access to 1-of-1 museum-quality creations, private salon appointments, and the untold stories of our master karigars.
             </p>
-            <MagneticButton>
-              <Link href="/account" className="inline-block tracking-[0.2em] text-[12px] uppercase bg-luxury-text text-luxury-bg px-12 py-5 hover:bg-luxury-gold transition-colors duration-[600ms] cursor-none">
-                Request Consultation
-              </Link>
-            </MagneticButton>
+            
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4 max-w-md mx-auto">
+              <input 
+                type="email" 
+                placeholder="Enter your private email address" 
+                className="w-full bg-transparent border-b border-luxury-text/20 py-4 px-2 text-center text-luxury-text placeholder:text-luxury-text-secondary/50 focus:outline-none focus:border-luxury-gold transition-colors duration-500 font-light"
+              />
+              <button className="whitespace-nowrap tracking-[0.2em] text-[12px] uppercase bg-luxury-text text-luxury-bg px-8 py-4 hover:bg-luxury-gold transition-colors duration-[600ms] cursor-none mt-8 md:mt-0">
+                Request Access
+              </button>
+            </div>
           </div>
         </FadeInReveal>
       </section>
