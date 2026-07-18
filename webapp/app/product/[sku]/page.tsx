@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import Navigation from '../../../components/Navigation';
 import Footer from '../../../components/Footer';
 import AddToCartButton from '../../../components/AddToCartButton';
+import ProductAccordion from '../../../components/ProductAccordion';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 
@@ -100,28 +101,28 @@ export default async function ProductPage({ params }: { params: Promise<{ sku: s
             />
           </div>
 
-          {/* Details Accordion (Sharp Hairlines) */}
-          <div className="border-t border-white/10 w-full max-w-lg">
-            <div className="py-8 border-b border-white/10 flex justify-between items-center cursor-pointer group">
-              <span className="tracking-[0.3em] text-[11px] uppercase text-[#8C857B] group-hover:text-white transition-colors duration-500">Provenance & Craft</span>
-              <span className="text-[#D4AF37] transition-transform duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:rotate-180">+</span>
-            </div>
-            <div className="py-8 border-b border-white/10 flex justify-between items-center cursor-pointer group">
-              <span className="tracking-[0.3em] text-[11px] uppercase text-[#8C857B] group-hover:text-white transition-colors duration-500">Secure Delivery</span>
-              <span className="text-[#D4AF37] transition-transform duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:rotate-180">+</span>
-            </div>
-            <div className="py-8 border-b border-white/10 flex justify-between items-center cursor-pointer group">
-              <span className="tracking-[0.3em] text-[11px] uppercase text-[#8C857B] group-hover:text-white transition-colors duration-500">Legacy Maintenance</span>
-              <span className="text-[#D4AF37] transition-transform duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:rotate-180">+</span>
-            </div>
-          </div>
+          {/* Details Accordion (Interactive Concierge) */}
+          <ProductAccordion />
         </div>
       </div>
+
+      {/* Quiet Acclaim (Curated Testimonial) */}
+      <section className="py-32 px-8 max-w-[1200px] mx-auto text-center border-b border-white/5">
+        <span className="tracking-[0.4em] text-[#8C857B] text-[10px] mb-12 block uppercase font-light">
+          Quiet Acclaim
+        </span>
+        <h2 className="font-serif text-3xl md:text-5xl leading-tight max-w-4xl mx-auto mb-12 text-[#E5E0D8]">
+          &ldquo;It does not feel like jewelry. It feels like armor. The weight of the gold is an absolute revelation.&rdquo;
+        </h2>
+        <p className="text-[#8C857B] font-light tracking-widest text-[11px] uppercase">
+          — A.D., Private Client
+        </p>
+      </section>
 
       {/* Related Products - Editorial Staggered Layout */}
       <section className="py-40 px-8 max-w-[1800px] mx-auto">
         <div className="text-center mb-32">
-          <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.02em]">You May Also Admire</h2>
+          <h2 className="font-serif text-5xl md:text-6xl tracking-[-0.02em]">Complementary Acquisitions</h2>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-24">
