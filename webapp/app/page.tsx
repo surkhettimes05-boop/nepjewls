@@ -7,6 +7,7 @@ import MagneticButton from '../components/MagneticButton';
 import Footer from '../components/Footer';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import DigitalVitrine from '../components/Canvas/DigitalVitrine';
 
 // Define the shape of our Prisma Product model
 interface Product {
@@ -37,39 +38,29 @@ export default function Home() {
   const editorialProducts = products.slice(0, 4);
 
   return (
-    <main className="bg-luxury-bg text-luxury-text min-h-screen overflow-x-hidden selection:bg-luxury-gold/20">
-      <Navigation />
+    <main className="bg-transparent text-luxury-text min-h-screen overflow-x-hidden selection:bg-luxury-gold/20 relative">
+      {/* 3D WebGL Background Canvas */}
+      <DigitalVitrine />
 
-      {/* 1. Hero Section (Restrained, 900px Max-Width, Dual CTAs) */}
-      <section className="relative w-screen h-screen flex flex-col justify-center items-center text-center text-luxury-text overflow-hidden bg-luxury-bg">
-        {/* Gentle Warm Vignette / Blur overlay */}
-        <div className="absolute inset-0 bg-radial-gradient from-transparent via-luxury-bg/10 to-luxury-bg/60 z-10 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-white/20 backdrop-blur-[1px] z-10 pointer-events-none"></div>
-        
-        <motion.div
-          initial={{ scale: 1.1, y: 64 }}
-          animate={{ scale: 1.05, y: 64 }}
-          transition={{ duration: 30, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
-          className="absolute inset-0 w-full h-full z-0"
-        >
-          <img 
-            src="/images/hero_premium_light_1784305541092.jpg" 
-            alt="NepJewls Cinematic Hero" 
-            className="w-full h-full object-cover opacity-80"
-          />
-        </motion.div>
-        
-        <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-[850px] px-8 mt-32">
+      <div className="relative z-10 pointer-events-none">
+        <div className="pointer-events-auto">
+          <Navigation />
+        </div>
+
+        {/* 1. Hero Section (Transparent to show 3D) */}
+        <section className="relative w-screen h-[120vh] flex flex-col justify-start items-center text-center text-luxury-text pt-40 pb-20">
           
-          <motion.h1 
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.6, delay: 0.5, ease: [0.85, 0, 0.15, 1] }}
-            className="font-serif text-luxury-text tracking-tight mb-10 drop-shadow-[0_4px_32px_rgba(255,255,255,0.7)]"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', lineHeight: '1.25' }}
-          >
-            Forged in the Shadows of the Himalayas.
-          </motion.h1>
+          <div className="relative z-20 flex flex-col items-center justify-start w-full max-w-[850px] px-8 pointer-events-auto">
+            
+            <motion.h1 
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.6, delay: 0.5, ease: [0.85, 0, 0.15, 1] }}
+              className="font-serif text-[#E5E0D8] tracking-tight mb-10 drop-shadow-[0_4px_32px_rgba(0,0,0,0.8)] mix-blend-difference"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', lineHeight: '1.25' }}
+            >
+              Forged in the Shadows.
+            </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }}
@@ -80,24 +71,24 @@ export default function Home() {
             Where ancient Newari mastery meets modern architectural restraint. We do not manufacture jewelry; we curate eternal legacies.
           </motion.p>
           
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.8, delay: 1.4, ease: "easeOut" }}
-            className="mt-20 flex flex-col sm:flex-row items-center justify-center gap-12"
-          >
-            <MagneticButton>
-              <Link href="/collections" className="tracking-[0.2em] text-[12px] uppercase bg-luxury-text text-luxury-bg px-14 py-5 hover:bg-luxury-gold transition-colors duration-[600ms] flex items-center justify-center group cursor-pointer">
-                Explore The Masterpieces
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.8, delay: 1.4, ease: "easeOut" }}
+              className="mt-32 flex flex-col sm:flex-row items-center justify-center gap-12"
+            >
+              <MagneticButton>
+                <Link href="/collections" className="tracking-[0.2em] text-[12px] uppercase bg-luxury-text text-luxury-bg px-14 py-5 hover:bg-luxury-gold transition-colors duration-[600ms] flex items-center justify-center group cursor-pointer backdrop-blur-sm bg-opacity-90">
+                  Explore The Masterpieces
+                </Link>
+              </MagneticButton>
+              
+              <Link href="/account" className="tracking-[0.15em] text-[12px] uppercase text-luxury-text hover:text-luxury-gold transition-colors duration-[600ms] relative group py-2 drop-shadow-md">
+                Request Private Viewing
+                <span className="absolute bottom-0 left-0 w-full h-px bg-luxury-text transform scale-x-0 origin-left transition-transform duration-[600ms] group-hover:scale-x-100"></span>
               </Link>
-            </MagneticButton>
-            
-            <Link href="/account" className="tracking-[0.15em] text-[12px] uppercase text-luxury-text hover:text-luxury-gold transition-colors duration-[600ms] relative group py-2">
-              Request Private Viewing
-              <span className="absolute bottom-0 left-0 w-full h-px bg-luxury-text transform scale-x-0 origin-left transition-transform duration-[600ms] group-hover:scale-x-100"></span>
-            </Link>
-          </motion.div>
-        </div>
+            </motion.div>
+          </div>
 
         {/* Luxury Trust Bar */}
         <motion.div 
@@ -106,7 +97,7 @@ export default function Home() {
           transition={{ duration: 2.0, delay: 1.8, ease: "easeOut" }}
           className="absolute bottom-16 z-20 w-full flex justify-center"
         >
-          <div className="flex items-center text-[10px] uppercase tracking-[0.3em] text-[#3a3530] text-center">
+          <div className="flex items-center text-[10px] uppercase tracking-[0.3em] text-[#E5E0D8] text-center drop-shadow-lg mix-blend-difference pointer-events-auto">
             <span className="px-6">Certified Provenance</span>
             <span className="hidden sm:inline opacity-30">|</span>
             <span className="px-6">Conflict-Free Diamonds</span>
@@ -115,6 +106,9 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      {/* Solidify background for subsequent sections to improve readability */}
+      <div className="relative z-20 pointer-events-auto bg-luxury-bg">
 
       {/* 2. The Heritage (Craftsmanship / Artisan Story) */}
       <section className="py-40 px-8 text-center flex items-center justify-center min-h-[80vh] bg-luxury-bg-secondary">
@@ -269,7 +263,8 @@ export default function Home() {
         </FadeInReveal>
       </section>
 
-      <Footer />
+      </div>
+      </div>
     </main>
   );
 }
