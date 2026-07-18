@@ -1,59 +1,40 @@
-:root {
-  /* Brand Tokens */
-  --color-primary: #1B2A3A;   /* Deep Charcoal Navy */
-  --color-accent: #A87C2A;    /* Antique Gold */
-  --color-neutral: #F2EDE4;   /* Warm Ivory */
-  --color-support: #5B5B5B;   /* Slate Grey */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  /* Spacing Scale (8px) */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 40px;
-  --space-6: 64px;
-  --space-7: 96px;
-
-  /* Motion Language */
-  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
-  --duration-fast: 200ms;
-  --duration-base: 400ms;
-  --duration-slow: 700ms;
-
-  --border-radius: 8px;
+@layer base {
+  body {
+    @apply bg-luxury-bg text-luxury-text font-sans antialiased;
+    /* Hide standard cursor for custom cursor */
+    cursor: none;
+  }
+  
+  a, button, [role="button"] {
+    cursor: none;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-light text-luxury-text;
+  }
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--color-neutral);
-  color: var(--color-primary);
-  /* Fonts are injected via layout.js using CSS variables */
-  font-family: var(--font-inter), sans-serif;
-  line-height: 1.6;
-}
+@layer utilities {
+  .hairline-border {
+    border-width: 1px;
+    border-color: theme('colors.luxury-border');
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-playfair), serif;
-  font-weight: 500;
-  margin-top: 0;
-  color: var(--color-primary);
-}
-
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-/* Global utility classes for container sizing */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--space-4);
-}
-
-/* Product Card Hover Logic */
-.product-card:hover img:last-child {
-  opacity: 1 !important;
-  transform: scale(1) !important;
+  .hairline-border-b {
+    border-bottom-width: 1px;
+    border-bottom-color: theme('colors.luxury-border');
+  }
+  
+  .full-bleed {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
 }

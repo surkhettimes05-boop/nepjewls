@@ -2,10 +2,29 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 
-const CartContext = createContext();
+interface CartItem {
+  id: string;
+  sku: string;
+  name: string;
+  price: number;
+  image: string;
+  quantity: number;
+}
 
-export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
+interface CartContextType {
+  cart: CartItem[];
+  addToCart: (product: any) => void;
+  removeFromCart: (productId: string) => void;
+  clearCart: () => void;
+  cartTotal: number;
+  cartCount: number;
+  isMounted: boolean;
+}
+
+const CartContext = createContext<CartContextType | undefined>(undefined);
+
+export function CartProvider({ children }: { children: React.ReactNode }) {
+  const [cart, setCart] = useState<CartItem[]>([]);
   const [isMounted, setIsMounted] = useState(false);
 
   // Load from local storage on mount to persist cart across refreshes
