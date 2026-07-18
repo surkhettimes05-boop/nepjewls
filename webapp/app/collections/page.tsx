@@ -48,10 +48,17 @@ export default async function CollectionsPage() {
                   >
                     {/* Image Container with Sharp Geometries */}
                     <div className="relative aspect-[3/4] overflow-hidden mb-10 bg-[#1A1614] border border-white/5" data-cursor="view">
+                      {/* Secondary Lifestyle Image (Revealed on Hover) */}
+                      <img 
+                        src="/images/campaign_editorial_1784294400298.jpg" 
+                        alt={`${product.name} Lifestyle`} 
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:scale-100 scale-105 z-0 opacity-0 group-hover:opacity-60" 
+                      />
+                      {/* Primary Macro Image */}
                       <img 
                         src={product.image} 
                         alt={product.name} 
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:scale-[1.03] z-10 opacity-90 group-hover:opacity-100 grayscale-[20%] group-hover:grayscale-0" 
+                        className="absolute inset-0 w-full h-full object-cover transition-all duration-[1400ms] ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:scale-[1.05] z-10 opacity-100 group-hover:opacity-0" 
                       />
                       {/* Atmospheric Glow Overlay */}
                       <div className="absolute inset-0 bg-radial-gradient from-transparent to-luxury-bg/30 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-[1400ms]"></div>

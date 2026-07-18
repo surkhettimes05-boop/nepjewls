@@ -88,6 +88,16 @@ export default function CartPage() {
                     </span>
                   </MagneticButton>
                 </Link>
+
+                <div className="mt-4">
+                  <MagneticButton>
+                    <button className="w-full flex items-center justify-center gap-3 bg-black text-white border border-white/10 px-12 py-4 hover:bg-white/5 transition-colors duration-[400ms] cursor-pointer">
+                      <svg width="40" height="16" viewBox="0 0 40 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.5 15.5C14 15.5 12 14.5 10.5 13C9 11.5 8 9.5 8 7.5C8 5.5 9 3.5 10.5 2C12 0.5 14 -0.5 16.5 -0.5C18.5 -0.5 20.5 0.5 21.5 1.5L20 3C19 2 17.5 1.5 16.5 1.5C14.5 1.5 13 2 12 3.5C11 5 10.5 6.5 10.5 7.5C10.5 9 11 10.5 12 11.5C13 13 14.5 13.5 16.5 13.5C18.5 13.5 20 12.5 21 11.5V9H16.5V7H23V11.5C21.5 14 19 15.5 16.5 15.5ZM31 15.5V13.5H27.5V11.5H30.5V9.5H27.5V7.5H31V5.5H25.5V15.5H31ZM35.5 15.5H38L35 7.5H32.5L29.5 15.5H32L32.5 14H35L35.5 15.5ZM33 12.5L33.5 11L34.5 12.5H33ZM3.5 5.5C4.5 5.5 5.5 4.5 5.5 3.5C5.5 2.5 4.5 1.5 3.5 1.5C2.5 1.5 1.5 2.5 1.5 3.5C1.5 4.5 2.5 5.5 3.5 5.5Z" />
+                      </svg>
+                    </button>
+                  </MagneticButton>
+                </div>
                 
                 <p className="text-luxury-text-secondary font-light text-sm text-center mt-8">
                   Secure encryption on all transactions.

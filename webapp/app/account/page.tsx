@@ -16,14 +16,16 @@ export default function AccountPage() {
       date: 'Dec 12, 2025',
       piece: 'The Kathmandu Signet',
       status: 'Secured in Vault',
-      price: 'Rs. 850,000'
+      price: 'Rs. 850,000',
+      image: '/images/product_signet_ring_1784343759398.jpg'
     },
     {
       id: 'nep-341-89',
       date: 'Aug 04, 2024',
       piece: 'The Shadow Lotus Pendant',
       status: 'Delivered',
-      price: 'Rs. 620,000'
+      price: 'Rs. 620,000',
+      image: '/images/product_lotus_pendant_1784343791427.jpg'
     }
   ];
 
@@ -62,7 +64,12 @@ export default function AccountPage() {
                   {mockAcquisitions.map((item, index) => (
                     <tr key={index} className="border-b border-white/5 last:border-0 hover:bg-white/[0.02] transition-colors">
                       <td className="p-6 text-[#8C857B]">{item.date}</td>
-                      <td className="p-6 text-[#E5E0D8]">{item.piece}</td>
+                      <td className="p-6 text-[#E5E0D8] flex items-center gap-4">
+                        <div className="w-10 h-10 overflow-hidden bg-black border border-white/10 hidden md:block">
+                          <img src={item.image} alt={item.piece} className="w-full h-full object-cover opacity-90" />
+                        </div>
+                        {item.piece}
+                      </td>
                       <td className="p-6">
                         <span className="px-3 py-1 text-[9px] uppercase tracking-widest border border-white/10 text-[#8C857B]">
                           {item.status}
