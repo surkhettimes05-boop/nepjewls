@@ -228,7 +228,7 @@ export default function Home() {
           <FadeInReveal>
             <span className="tracking-[0.25em] text-luxury-text-secondary mb-12 block text-[10px] uppercase">Quiet Acclaim</span>
             <p className="font-serif text-3xl md:text-5xl max-w-4xl mx-auto leading-[1.3] text-luxury-text mb-16">
-              "It does not feel like jewelry. It feels like armor. The weight and the finish are unlike anything I have purchased in Paris or Geneva."
+              &ldquo;It does not feel like jewelry. It feels like armor. The weight and the finish are unlike anything I have purchased in Paris or Geneva.&rdquo;
             </p>
             <span className="tracking-[0.25em] text-luxury-text-secondary text-[11px] uppercase">
               — A.D., Private Client
