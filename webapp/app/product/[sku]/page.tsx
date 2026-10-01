@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ sku: stri
 
 export default async function ProductPage({ params }: { params: Promise<{ sku: string }> }) {
   const resolvedParams = await params;
-  const product = await prisma.product.findUnique({ where: { sku: resolvedParams.sku } });
+  const product = await prisma.product.findFirst({ where: { sku: resolvedParams.sku, active: true } });
 
   if (!product) {
     notFound();
@@ -39,13 +39,14 @@ export default async function ProductPage({ params }: { params: Promise<{ sku: s
   const relatedProducts = await prisma.product.findMany({
     where: { 
       id: { not: product.id },
+      active: true,
       category: product.category
     },
     take: 3
   });
 
   const finalRelated = relatedProducts.length > 0 ? relatedProducts : await prisma.product.findMany({
-    where: { id: { not: product.id } },
+    where: { id: { not: product.id }, active: true },
     take: 3
   });
 
@@ -89,7 +90,8 @@ export default async function ProductPage({ params }: { params: Promise<{ sku: s
           </p>
 
           <div className="mb-32">
-            <AddToCartButton 
+            <AddToCartButton
+              available={product.stockOnHand > 0}
               product={{
                 id: product.id,
                 sku: product.sku,
