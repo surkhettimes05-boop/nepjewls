@@ -1,16 +1,16 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from "../../lib/prisma";
 import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import FadeInReveal from '../../components/FadeInReveal';
 import Link from 'next/link';
 
-const prisma = new PrismaClient();
 
 export const dynamic = 'force-dynamic';
 
 export default async function BridalPage() {
   let products = await prisma.product.findMany({
     where: {
+      active: true,
       category: {
         contains: 'Bridal'
       }
@@ -18,7 +18,7 @@ export default async function BridalPage() {
   });
 
   if (products.length === 0) {
-    products = await prisma.product.findMany({ take: 4 });
+    products = await prisma.product.findMany({ where: { active: true }, take: 4 });
   }
 
   return (
@@ -78,7 +78,7 @@ export default async function BridalPage() {
                     </h3>
                     <div className="flex justify-between w-full items-center mt-2">
                       <span className="tracking-[0.3em] text-[#8C857B] text-[10px] uppercase font-light">{product.category}</span>
-                      <span className="text-[#8C857B] font-light text-sm tracking-wide">Rs. {product.price.toLocaleString()}</span>
+                      <span className="text-[#8C857B] font-light text-sm tracking-wide">Rs. {Number(product.price).toLocaleString()}</span>
                     </div>
                   </div>
                 </Link>
