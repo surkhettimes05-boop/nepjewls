@@ -1,11 +1,12 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from "../../../lib/prisma";
+import { requireAdmin } from "../../../lib/admin-auth";
 import OrderStatusSelect from '../../../components/OrderStatusSelect';
 
-const prisma = new PrismaClient();
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminOrdersPage() {
+  await requireAdmin();
   const orders = await prisma.order.findMany({
     orderBy: { createdAt: 'desc' },
     include: {
@@ -76,7 +77,7 @@ export default async function AdminOrdersPage() {
                     
                     {/* Amount & Payment */}
                     <td className="p-6 align-top">
-                      <div className="text-white mb-1">Rs. {order.totalAmount.toLocaleString()}</div>
+                      <div className="text-white mb-1">Rs. {Number(order.totalAmount).toLocaleString()}</div>
                       <div className="text-[10px] uppercase tracking-wider text-[#8C857B]">Via {order.paymentMethod}</div>
                     </td>
                     
