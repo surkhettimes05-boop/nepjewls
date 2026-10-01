@@ -1,41 +1,50 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface OrderStatusSelectProps {
   orderId: string;
   currentStatus: string;
 }
 
+const allowedTransitions: Record<string, string[]> = {
+  PENDING: ["PENDING", "CANCELLED"],
+  PAID: ["PAID", "SHIPPED"],
+  SHIPPED: ["SHIPPED"],
+  CANCELLED: ["CANCELLED"],
+};
+
 export default function OrderStatusSelect({ orderId, currentStatus }: OrderStatusSelectProps) {
   const [status, setStatus] = useState(currentStatus);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const options = allowedTransitions[currentStatus] || [currentStatus];
 
-  const handleStatusChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newStatus = e.target.value;
+  const handleStatusChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newStatus = event.target.value;
+    if (newStatus === currentStatus) return;
+
     setStatus(newStatus);
     setLoading(true);
 
     try {
-      const res = await fetch(`/api/admin/orders/${orderId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch("/api/admin/orders/" + orderId, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
       });
 
-      if (!res.ok) {
-        throw new Error('Failed to update status');
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to update status");
       }
 
-      router.refresh(); // Refresh the page to update server components
+      router.refresh();
     } catch (error) {
       console.error(error);
-      alert('Failed to update order status.');
-      setStatus(currentStatus); // Revert on failure
+      alert(error instanceof Error ? error.message : "Failed to update order status.");
+      setStatus(currentStatus);
     } finally {
       setLoading(false);
     }
@@ -45,19 +54,15 @@ export default function OrderStatusSelect({ orderId, currentStatus }: OrderStatu
     <select
       value={status}
       onChange={handleStatusChange}
-      disabled={loading}
-      className={`px-3 py-1 text-[10px] uppercase tracking-wider rounded-full border outline-none appearance-none cursor-pointer text-center
-        ${status === 'PAID' ? 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/20' : 
-          status === 'SHIPPED' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 
-          status === 'CANCELLED' ? 'bg-red-500/10 text-red-400 border-red-500/20' : 
-          'bg-white/5 text-[#8C857B] border-white/10'}
-        ${loading ? 'opacity-50 cursor-wait' : ''}
-      `}
+      disabled={loading || options.length === 1}
+      className={"px-3 py-1 text-[10px] uppercase tracking-wider rounded-full border outline-none appearance-none text-center " +
+        (loading || options.length === 1 ? "opacity-60 cursor-default" : "cursor-pointer")}
     >
-      <option value="PENDING" className="bg-[#1A1614] text-white">PENDING</option>
-      <option value="PAID" className="bg-[#1A1614] text-[#D4AF37]">PAID</option>
-      <option value="SHIPPED" className="bg-[#1A1614] text-green-400">SHIPPED</option>
-      <option value="CANCELLED" className="bg-[#1A1614] text-red-400">CANCELLED</option>
+      {options.map((option) => (
+        <option key={option} value={option} className="bg-[#1A1614] text-white">
+          {option}
+        </option>
+      ))}
     </select>
   );
 }

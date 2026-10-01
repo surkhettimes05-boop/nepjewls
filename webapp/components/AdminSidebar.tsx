@@ -40,12 +40,22 @@ export default function AdminSidebar() {
       </nav>
 
       <div className="mt-auto pt-8 border-t border-white/10">
-        <Link 
-          href="/" 
-          className="text-xs text-[#8C857B] hover:text-white transition-colors tracking-widest uppercase"
-        >
-          &larr; Back to Storefront
-        </Link>
+        <div className="space-y-4">
+          <form method="post" action="/api/admin/auth/logout">
+            <button
+              type="submit"
+              className="text-xs text-[#8C857B] hover:text-white transition-colors tracking-widest uppercase"
+            >
+              Sign out
+            </button>
+          </form>
+          <Link 
+            href="/" 
+            className="block text-xs text-[#8C857B] hover:text-white transition-colors tracking-widest uppercase"
+          >
+            &larr; Back to Storefront
+          </Link>
+        </div>
       </div>
     </aside>
   );

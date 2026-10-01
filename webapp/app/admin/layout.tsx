@@ -1,15 +1,22 @@
-import AdminSidebar from '../../components/AdminSidebar';
+import AdminSidebar from "../../components/AdminSidebar";
+import { isAdminAuthenticated } from "../../lib/admin-auth";
 
 export const metadata = {
   title: 'NepJewls Ledger | Admin',
   description: 'Backend management for NepJewls',
 };
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const authenticated = await isAdminAuthenticated();
+
+  if (!authenticated) {
+    return <>{children}</>;
+  }
+
   return (
     <div className="flex min-h-screen bg-luxury-bg text-[#E5E0D8] selection:bg-luxury-gold/20">
       <AdminSidebar />

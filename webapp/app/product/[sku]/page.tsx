@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from "../../../lib/prisma";
 import Navigation from '../../../components/Navigation';
 import Footer from '../../../components/Footer';
 import AddToCartButton from '../../../components/AddToCartButton';
@@ -6,21 +6,20 @@ import ProductAccordion from '../../../components/ProductAccordion';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 
-const prisma = new PrismaClient();
 
 // This ensures dynamic parameters are available
 export const dynamicParams = true;
 
 // Pre-generate static parameters at build time for speed, if we want
 export async function generateStaticParams() {
-  const products = await prisma.product.findMany();
+  const products = await prisma.product.findMany({ where: { active: true } });
   return products.map((p) => ({ sku: p.sku }));
 }
 
 // Generate SEO meta tags dynamically
 export async function generateMetadata({ params }: { params: Promise<{ sku: string }> }) {
   const resolvedParams = await params;
-  const product = await prisma.product.findUnique({ where: { sku: resolvedParams.sku } });
+  const product = await prisma.product.findFirst({ where: { sku: resolvedParams.sku, active: true } });
   if (!product) return { title: 'Product Not Found - NepJewls' };
   return {
     title: `${product.name} | NepJewls Masterpieces`,
@@ -30,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ sku: stri
 
 export default async function ProductPage({ params }: { params: Promise<{ sku: string }> }) {
   const resolvedParams = await params;
-  const product = await prisma.product.findUnique({ where: { sku: resolvedParams.sku } });
+  const product = await prisma.product.findFirst({ where: { sku: resolvedParams.sku, active: true } });
 
   if (!product) {
     notFound();
@@ -40,13 +39,14 @@ export default async function ProductPage({ params }: { params: Promise<{ sku: s
   const relatedProducts = await prisma.product.findMany({
     where: { 
       id: { not: product.id },
+      active: true,
       category: product.category
     },
     take: 3
   });
 
   const finalRelated = relatedProducts.length > 0 ? relatedProducts : await prisma.product.findMany({
-    where: { id: { not: product.id } },
+    where: { id: { not: product.id }, active: true },
     take: 3
   });
 
@@ -82,7 +82,7 @@ export default async function ProductPage({ params }: { params: Promise<{ sku: s
           </h1>
           
           <div className="font-light text-[#8C857B] text-xl mb-16 tracking-wide">
-            Rs. {product.price.toLocaleString()}
+            Rs. {Number(product.price).toLocaleString()}
           </div>
           
           <p className="text-[#E5E0D8] font-light text-lg leading-[1.8] mb-24 max-w-lg opacity-90">
@@ -90,12 +90,13 @@ export default async function ProductPage({ params }: { params: Promise<{ sku: s
           </p>
 
           <div className="mb-32">
-            <AddToCartButton 
+            <AddToCartButton
+              available={product.stockOnHand > 0}
               product={{
                 id: product.id,
                 sku: product.sku,
                 name: product.name,
-                price: product.price,
+                price: Number(product.price),
                 image: product.image
               }} 
             />
@@ -148,7 +149,7 @@ export default async function ProductPage({ params }: { params: Promise<{ sku: s
                     {related.name}
                     <span className="absolute -bottom-1 left-0 w-full h-px bg-[#E5E0D8] transform scale-x-0 origin-left transition-transform duration-[1200ms] ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:scale-x-100"></span>
                   </h3>
-                  <span className="text-[#8C857B] font-light text-sm tracking-wide">Rs. {related.price.toLocaleString()}</span>
+                  <span className="text-[#8C857B] font-light text-sm tracking-wide">Rs. {Number(related.price).toLocaleString()}</span>
                 </div>
               </Link>
             );

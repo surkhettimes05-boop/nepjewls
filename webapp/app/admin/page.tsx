@@ -1,11 +1,12 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from "../../lib/prisma";
+import { requireAdmin } from "../../lib/admin-auth";
 import Link from 'next/link';
 
-const prisma = new PrismaClient();
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboard() {
+  await requireAdmin();
   // Fetch metrics
   const productsCount = await prisma.product.count();
   
@@ -17,7 +18,7 @@ export default async function AdminDashboard() {
       }
     }
   });
-  const totalRevenue = completedOrders.reduce((sum, order) => sum + order.totalAmount, 0);
+  const totalRevenue = completedOrders.reduce((sum, order) => sum + Number(order.totalAmount), 0);
   
   // Active Orders (PENDING or PAID)
   const activeOrdersCount = await prisma.order.count({
@@ -95,7 +96,7 @@ export default async function AdminDashboard() {
                   <tr key={order.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
                     <td className="p-6 text-[#8C857B]">{order.id.split('-')[0]}...</td>
                     <td className="p-6">{order.user?.name || 'Guest'}</td>
-                    <td className="p-6">Rs. {order.totalAmount.toLocaleString()}</td>
+                    <td className="p-6">Rs. {Number(order.totalAmount).toLocaleString()}</td>
                     <td className="p-6">
                       <span className={`px-3 py-1 text-[10px] uppercase tracking-wider rounded-full border 
                         ${order.status === 'PAID' ? 'bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/20' : 

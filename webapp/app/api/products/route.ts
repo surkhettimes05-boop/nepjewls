@@ -1,19 +1,22 @@
-import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { NextResponse } from "next/server";
+import { prisma } from "../../../lib/prisma";
 
 export async function GET() {
   try {
     const products = await prisma.product.findMany({
-      orderBy: { createdAt: 'desc' }
+      where: { active: true },
+      orderBy: { createdAt: "desc" },
     });
-    
-    return NextResponse.json(products);
+
+    return NextResponse.json(
+      products.map((product) => ({
+        ...product,
+        price: Number(product.price),
+        availableStock: Math.max(0, product.stockOnHand),
+      }))
+    );
   } catch (error) {
-    console.error('Failed to fetch products:', error);
-    return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();
+    console.error("Failed to fetch products:", error);
+    return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
   }
 }
