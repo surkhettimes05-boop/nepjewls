@@ -75,6 +75,8 @@ function CheckoutSuccessContent() {
     if (searchParams.toString()) {
       verifyPayment();
     }
+  // clearCart is intentionally invoked only after a verified callback.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   return (
