@@ -1,11 +1,12 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from "../../../lib/prisma";
+import { requireAdmin } from "../../../lib/admin-auth";
 import Link from 'next/link';
 
-const prisma = new PrismaClient();
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminProductsPage() {
+  await requireAdmin();
   const products = await prisma.product.findMany({
     orderBy: { createdAt: 'desc' }
   });
@@ -39,7 +40,7 @@ export default async function AdminProductsPage() {
             <div className="p-6">
               <h3 className="font-serif text-xl text-white mb-2 truncate" title={product.name}>{product.name}</h3>
               <div className="flex justify-between items-end mt-4">
-                <span className="text-[#8C857B] font-light text-sm">Rs. {product.price.toLocaleString()}</span>
+                <span className="text-[#8C857B] font-light text-sm">Rs. {Number(product.price).toLocaleString()}</span>
                 <span className="text-[10px] uppercase tracking-widest text-[#8C857B] font-mono">SKU: {product.sku}</span>
               </div>
             </div>
