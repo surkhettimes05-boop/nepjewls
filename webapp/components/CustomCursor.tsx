@@ -7,15 +7,8 @@ export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [cursorVariant, setCursorVariant] = useState('default');
   const [cursorText, setCursorText] = useState('');
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
-    // Detect touch devices
-    if (window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768) {
-      setIsTouchDevice(true);
-      return;
-    }
-
     const mouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -46,8 +39,6 @@ export default function CustomCursor() {
       window.removeEventListener('mouseover', handleMouseOver);
     };
   }, []);
-
-  if (isTouchDevice) return null;
 
   const variants: Variants = {
     default: {
@@ -83,7 +74,7 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] flex items-center justify-center font-sans uppercase tracking-[0.18em] text-[10px]"
+      className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden md:flex items-center justify-center font-sans uppercase tracking-[0.18em] text-[10px]"
       variants={variants}
       animate={cursorVariant}
     >
