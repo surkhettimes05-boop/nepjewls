@@ -62,7 +62,10 @@ async function main() {
         description: p.description,
         image: p.image,
         has360: p.has360,
-        category: p.category
+        category: p.category,
+        stockOnHand: p.stockOnHand,
+        stockReserved: 0,
+        active: true
       },
       create: p,
     })
