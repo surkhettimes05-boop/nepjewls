@@ -10,7 +10,8 @@ const initialProducts = [
     description: 'A masterclass in restraint. This piece balances the raw, grounding power of Himalayan gold with the exactitude of modern geometry. Forged over 140 hours in our Patan atelier.',
     image: '/images/product_signet_ring_1784343759398.jpg',
     has360: true,
-    category: 'The Architectural Collection'
+    category: 'The Architectural Collection',
+    stockOnHand: 1
   },
   {
     sku: 'nep-bridal-01',
@@ -19,7 +20,8 @@ const initialProducts = [
     description: 'An uncompromising brilliant-cut diamond, suspended in pure darkness. The setting is minimal to the point of invisibility, allowing the stone to hold the light with absolute authority.',
     image: '/images/product_solitaire_diamond_1784343770631.jpg',
     has360: false,
-    category: 'Bridal'
+    category: 'Bridal',
+    stockOnHand: 1
   },
   {
     sku: 'nep-bangle-01',
@@ -28,7 +30,8 @@ const initialProducts = [
     description: 'Forged in the shadows of the Himalayas. Solid 24k gold, brutally hammered and stacked with uncut sapphires. A piece of wearable armor that commands attention without raising its voice.',
     image: '/images/product_hammered_bangle_1784343780875.jpg',
     has360: false,
-    category: 'High Jewelry'
+    category: 'High Jewelry',
+    stockOnHand: 1
   },
   {
     sku: 'nep-pendant-01',
@@ -37,7 +40,8 @@ const initialProducts = [
     description: 'The ancient Newari lotus motif reimagined through a lens of brutalist restraint. Cast in shadow, catching a single sliver of light to reveal its mathematical perfection.',
     image: '/images/product_lotus_pendant_1784343791427.jpg',
     has360: false,
-    category: 'The Signature Lotus'
+    category: 'The Signature Lotus',
+    stockOnHand: 1
   }
 ]
 
