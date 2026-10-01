@@ -29,15 +29,19 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   // Load from local storage on mount to persist cart across refreshes
   useEffect(() => {
-    setIsMounted(true);
-    const savedCart = localStorage.getItem('nepjewls_cart');
-    if (savedCart) {
-      try {
-        setCart(JSON.parse(savedCart));
-      } catch (e) {
-        console.error("Could not parse cart from local storage.");
+    const frame = window.requestAnimationFrame(() => {
+      const savedCart = localStorage.getItem('nepjewls_cart');
+      if (savedCart) {
+        try {
+          setCart(JSON.parse(savedCart));
+        } catch {
+          console.error("Could not parse cart from local storage.");
+        }
       }
-    }
+      setIsMounted(true);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   // Save to local storage whenever cart changes
