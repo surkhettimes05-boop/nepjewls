@@ -37,7 +37,7 @@ function CheckoutSuccessContent() {
         }
         
         try {
-          const decodedData = JSON.parse(Buffer.from(data, 'base64').toString('utf-8'));
+          const decodedData = JSON.parse(atob(data));
           verifyPayload = { gateway: 'esewa', esewaData: data, orderId: decodedData.transaction_uuid };
         } catch (e) {
           setStatus('error');
