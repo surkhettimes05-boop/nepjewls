@@ -6,17 +6,18 @@ import { ReactNode } from 'react';
 interface FadeInRevealProps {
   children: ReactNode;
   delay?: number;
+  duration?: number;
   className?: string;
 }
 
-export default function FadeInReveal({ children, delay = 0, className = '' }: FadeInRevealProps) {
+export default function FadeInReveal({ children, delay = 0, duration = 1.2, className = '' }: FadeInRevealProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
       transition={{ 
-        duration: 1.2, 
+        duration, 
         delay: delay,
         ease: [0.22, 1, 0.36, 1] 
       }}
