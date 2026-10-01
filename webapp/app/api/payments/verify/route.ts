@@ -1,85 +1,173 @@
-import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-import { verifyKhaltiPayment } from '../../../../lib/khalti';
-import { verifyEsewaPayment } from '../../../../lib/esewa';
+import { NextResponse } from "next/server";
+import { Prisma } from "@prisma/client";
+import { prisma } from "../../../../lib/prisma";
+import { verifyKhaltiPayment } from "../../../../lib/khalti";
+import {
+  verifyEsewaPayment,
+  verifyEsewaResponseSignature,
+} from "../../../../lib/esewa";
 
-const prisma = new PrismaClient();
+function amountsMatch(a: unknown, b: unknown): boolean {
+  const left = Math.round(Number(String(a).replace(/,/g, "")) * 100);
+  const right = Math.round(Number(String(b).replace(/,/g, "")) * 100);
+  return Number.isFinite(left) && Number.isFinite(right) && left === right;
+}
+
+async function finalizePaidOrder(
+  orderId: string,
+  transactionId: string,
+  rawResponse: Record<string, unknown>
+) {
+  await prisma.$transaction(
+    async (tx) => {
+      const payment = await tx.payment.findUnique({
+        where: { orderId },
+        include: { order: { include: { items: true } } },
+      });
+
+      if (!payment) throw new Error("Payment record not found");
+      if (payment.status === "VERIFIED") return;
+      if (payment.order.status !== "PENDING") {
+        throw new Error("Order is not awaiting payment");
+      }
+
+      for (const item of payment.order.items) {
+        const released = await tx.product.updateMany({
+          where: {
+            id: item.productId,
+            stockReserved: { gte: item.quantity },
+          },
+          data: {
+            stockReserved: { decrement: item.quantity },
+          },
+        });
+
+        if (released.count !== 1) {
+          throw new Error("Inventory reservation is inconsistent");
+        }
+      }
+
+      await tx.payment.update({
+        where: { id: payment.id },
+        data: {
+          status: "VERIFIED",
+          transactionId,
+          verifiedAt: new Date(),
+          rawResponse: rawResponse as Prisma.InputJsonValue,
+        },
+      });
+
+      await tx.order.update({
+        where: { id: orderId },
+        data: { status: "PAID" },
+      });
+    },
+    { isolationLevel: Prisma.TransactionIsolationLevel.Serializable }
+  );
+}
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { gateway, orderId, pidx, esewaData } = body;
+    const gateway = String(body?.gateway || "").toLowerCase();
+    const orderId = String(body?.orderId || "");
 
-    if (!orderId) {
-      return NextResponse.json({ error: 'Order ID is required' }, { status: 400 });
+    if (!orderId || !["khalti", "esewa"].includes(gateway)) {
+      return NextResponse.json({ error: "Invalid verification request" }, { status: 400 });
     }
 
     const order = await prisma.order.findUnique({
       where: { id: orderId },
-      include: { payment: true }
+      include: { payment: true },
     });
 
-    if (!order || !order.payment) {
-      return NextResponse.json({ error: 'Order or payment record not found' }, { status: 404 });
+    if (!order?.payment) {
+      return NextResponse.json({ error: "Order or payment record not found" }, { status: 404 });
     }
 
-    if (order.payment.status === 'VERIFIED') {
-      return NextResponse.json({ message: 'Payment already verified', order });
+    if (order.payment.status === "VERIFIED") {
+      return NextResponse.json({ success: true, message: "Payment already verified" });
     }
 
-    let isVerified = false;
+    const expectedProvider = gateway === "khalti" ? "KHALTI" : "ESEWA";
+    if (order.payment.provider !== expectedProvider || order.paymentMethod !== expectedProvider) {
+      return NextResponse.json({ error: "Payment provider mismatch" }, { status: 400 });
+    }
 
-    if (gateway === 'khalti' && pidx) {
-      // 1. Verify with Khalti
-      const khaltiResponse = await verifyKhaltiPayment(pidx);
-      
-      // 2. Check if status is Completed and amount matches
-      if (khaltiResponse.status === 'Completed' && khaltiResponse.total_amount === order.totalAmount * 100) {
-        isVerified = true;
+    if (gateway === "khalti") {
+      const pidx = String(body?.pidx || "");
+      if (!pidx || !order.payment.providerRef || pidx !== order.payment.providerRef) {
+        return NextResponse.json({ error: "Khalti payment reference mismatch" }, { status: 400 });
       }
-    } else if (gateway === 'esewa' && esewaData) {
-      // 1. Decode eSewa base64 data
-      // eSewa returns a base64 encoded JSON string in the 'data' query param
-      const decodedData = JSON.parse(Buffer.from(esewaData, 'base64').toString('utf-8'));
-      
-      const { transaction_code, status, total_amount, transaction_uuid } = decodedData;
 
-      // 2. Verify with eSewa server (optional but recommended for security, we'll do it if it says COMPLETE)
-      if (status === 'COMPLETE') {
-        const product_code = process.env.ESEWA_MERCHANT_ID || 'EPAYTEST';
-        
-        // Wait, standard eSewa v2 might just need us to trust the signature or hit the status API
-        // For this luxury demo, if it says COMPLETE we will hit the verification API to be sure
-        const esewaResponse = await verifyEsewaPayment(product_code, order.totalAmount, transaction_uuid);
-        
-        if (esewaResponse.status === 'COMPLETE' || esewaResponse[0]?.transaction_details?.status === 'COMPLETE') {
-            isVerified = true;
-        }
+      const response = await verifyKhaltiPayment(pidx);
+      const expectedPaisa = Math.round(Number(order.payment.amount) * 100);
+
+      if (
+        response?.pidx !== pidx ||
+        response?.status !== "Completed" ||
+        Number(response?.total_amount) !== expectedPaisa ||
+        !response?.transaction_id
+      ) {
+        return NextResponse.json({ error: "Khalti payment verification failed" }, { status: 400 });
       }
+
+      await finalizePaidOrder(order.id, String(response.transaction_id), response);
+      return NextResponse.json({ success: true, message: "Payment verified successfully" });
     }
 
-    if (isVerified) {
-      // Update database status
-      await prisma.$transaction([
-        prisma.order.update({
-          where: { id: orderId },
-          data: { status: 'PAID' }
-        }),
-        prisma.payment.update({
-          where: { id: order.payment.id },
-          data: { status: 'VERIFIED' }
-        })
-      ]);
-
-      return NextResponse.json({ success: true, message: 'Payment verified successfully' });
-    } else {
-      return NextResponse.json({ error: 'Payment verification failed' }, { status: 400 });
+    const encoded = String(body?.esewaData || "");
+    if (!encoded) {
+      return NextResponse.json({ error: "Missing eSewa response" }, { status: 400 });
     }
 
+    let decoded: Record<string, unknown>;
+    try {
+      decoded = JSON.parse(Buffer.from(encoded, "base64").toString("utf-8"));
+    } catch {
+      return NextResponse.json({ error: "Invalid eSewa response" }, { status: 400 });
+    }
+
+    if (
+      !verifyEsewaResponseSignature(decoded) ||
+      decoded.status !== "COMPLETE" ||
+      String(decoded.transaction_uuid || "") !== order.payment.providerRef ||
+      !amountsMatch(decoded.total_amount, order.payment.amount)
+    ) {
+      return NextResponse.json({ error: "eSewa response integrity check failed" }, { status: 400 });
+    }
+
+    const statusResponse = await verifyEsewaPayment(
+      Number(order.payment.amount),
+      String(order.payment.providerRef)
+    );
+
+    if (
+      statusResponse?.status !== "COMPLETE" ||
+      !amountsMatch(statusResponse?.totalAmount ?? statusResponse?.total_amount, order.payment.amount)
+    ) {
+      return NextResponse.json({ error: "eSewa payment verification failed" }, { status: 400 });
+    }
+
+    const transactionId = String(
+      decoded.transaction_code ||
+      statusResponse?.refId ||
+      statusResponse?.transaction_code ||
+      ""
+    );
+
+    if (!transactionId) {
+      return NextResponse.json({ error: "eSewa transaction identifier missing" }, { status: 400 });
+    }
+
+    await finalizePaidOrder(order.id, transactionId, {
+      callback: decoded,
+      status: statusResponse,
+    });
+
+    return NextResponse.json({ success: true, message: "Payment verified successfully" });
   } catch (error) {
-    console.error('Payment Verification Error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();
+    console.error("Payment Verification Error:", error);
+    return NextResponse.json({ error: "Payment verification failed" }, { status: 500 });
   }
 }
